@@ -6,6 +6,22 @@ Java/Kotlin client for Yandex ClickHouse (https://clickhouse.yandex)
 
 There are three different clients, from raw low-level client to simple object mapper.
 
+Typed client (looks like JDBC ResultSet class)
+```java
+HttpTransport httpTransport = new ApacheHttpClientTransport();
+ClickHouseTypedClient typedClient = new ClickHouseTypedClient(httpTransport);
+
+try (TypedResponse typedResponse = typedClient.select("http://localhost:8123", "SELECT * FROM table");) {
+    for (TypedRow typedRow : typedResponse) {
+        int firstValue = typedRow.getInt32(1);
+        Date secondValue = typedRow.getDateTime(2);
+        List<Integer> thirdValue = typedRow.getInt32Array(3);
+
+        System.out.println(firstValue + ":" + secondValue + ":" + thirdValue);
+    }
+}
+```
+
 Raw client (very low level, use if you want to control everything)
 
 ```java
@@ -19,21 +35,6 @@ try (RawResponse rawResponse = rawClient.select("http://localhost:8123", "SELECT
 }
 ```
 
-Typed client (looks like JDBC ResultSet class)
-```java
-HttpTransport httpTransport = new ApacheHttpClientTransport();
-ClickHouseTypedClient typedClient = new ClickHouseTypedClient(httpTransport);
-
-try (TypedResponse typedResponse = typedClient.select("http://localhost:8123", "SELECT * FROM ecwid.test");) {
-    for (TypedRow typedRow : typedResponse) {
-        int firstValue = typedRow.getInt32(1);
-        Date secondValue = typedRow.getDateTime(2);
-        List<Integer> thirdValue = typedRow.getInt32Array(3);
-
-        System.out.println(firstValue + ":" + secondValue + ":" + thirdValue);
-    }
-}
-```
 
 ## How to add clickhouse-client into your project
 ### Gradle
