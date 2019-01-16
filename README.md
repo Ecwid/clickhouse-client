@@ -11,8 +11,8 @@ Typed client (looks like JDBC ResultSet class)
 HttpTransport httpTransport = new ApacheHttpClientTransport();
 ClickHouseTypedClient typedClient = new ClickHouseTypedClient(httpTransport);
 
-try (TypedResponse typedResponse = typedClient.select("http://localhost:8123", "SELECT * FROM table");) {
-    for (TypedRow typedRow : typedResponse) {
+try (TypedResponse response = typedClient.select("http://localhost:8123", "SELECT * FROM table")) {
+    for (TypedRow typedRow : response) {
         int firstValue = typedRow.getInt32(1);
         Date secondValue = typedRow.getDateTime(2);
         List<Integer> thirdValue = typedRow.getInt32Array(3);
@@ -28,8 +28,8 @@ Raw client (very low level, use if you want to control everything)
 HttpTransport httpTransport = new ApacheHttpClientTransport();
 ClickHouseRawClient rawClient = new ClickHouseRawClient(httpTransport);
 
-try (RawResponse rawResponse = rawClient.select("http://localhost:8123", "SELECT * FROM table")) {
-    for (RawRow row : rawResponse) {
+try (RawResponse response = rawClient.select("http://localhost:8123", "SELECT * FROM table")) {
+    for (RawRow row : response) {
         System.out.println(row);
     }
 }
