@@ -10,7 +10,7 @@ class ClickHouseMappedClient(httpTransport: HttpTransport) {
 
     private val typedClient = ClickHouseTypedClient(httpTransport)
 
-    fun <T> select(host: String, sqlQuery: String, mapper: SelectMapper<T>): MappedResponse<T> {
+    fun <T> select(host: String, sqlQuery: String, mapper: (TypedRow) -> T): MappedResponse<T> {
         val typedResponse = typedClient.select(host, sqlQuery)
         return MappedResponse(typedResponse, mapper)
     }

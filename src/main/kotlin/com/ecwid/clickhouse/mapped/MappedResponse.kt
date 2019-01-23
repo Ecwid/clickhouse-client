@@ -1,10 +1,11 @@
 package com.ecwid.clickhouse.mapped
 
 import com.ecwid.clickhouse.typed.TypedResponse
+import com.ecwid.clickhouse.typed.TypedRow
 
 class MappedResponse<T>(
     private val typedResponse: TypedResponse,
-    private val mapper: SelectMapper<T>
+    private val mapper: (TypedRow) -> T
 ) : Iterable<T>, AutoCloseable {
 
     override fun iterator(): Iterator<T> {
