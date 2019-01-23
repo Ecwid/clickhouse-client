@@ -1,7 +1,5 @@
 package com.ecwid.clickhouse
 
-import java.lang.RuntimeException
-
 open class ClickHouseException : RuntimeException {
 
     constructor() : super()

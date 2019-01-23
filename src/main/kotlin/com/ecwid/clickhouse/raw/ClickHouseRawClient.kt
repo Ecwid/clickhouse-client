@@ -1,13 +1,14 @@
 package com.ecwid.clickhouse.raw
 
 import com.ecwid.clickhouse.ClickHouseHttpException
+import com.ecwid.clickhouse.ClickHouseResponse
 import com.ecwid.clickhouse.transport.HttpResponse
 import com.ecwid.clickhouse.transport.HttpTransport
 import java.net.URLEncoder
 
 class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 
-    fun select(host: String, sqlQuery: String): RawResponse {
+    fun select(host: String, sqlQuery: String): ClickHouseResponse<RawRow> {
         val formattedQuery = "$sqlQuery format JSONCompact"
         val encodedQuery = URLEncoder.encode(formattedQuery, "UTF-8")
         val path = "query=$encodedQuery"
@@ -39,6 +40,5 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
             throw ClickHouseHttpException(code, msg, content)
         }
     }
-
 
 }

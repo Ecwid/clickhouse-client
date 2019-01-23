@@ -1,12 +1,12 @@
 package com.ecwid.clickhouse.mapped
 
-import com.ecwid.clickhouse.typed.TypedResponse
+import com.ecwid.clickhouse.ClickHouseResponse
 import com.ecwid.clickhouse.typed.TypedRow
 
-class MappedResponse<T>(
-    private val typedResponse: TypedResponse,
+internal class MappedResponse<T>(
+    private val typedResponse: ClickHouseResponse<TypedRow>,
     private val mapper: (TypedRow) -> T
-) : Iterable<T>, AutoCloseable {
+) : ClickHouseResponse<T> {
 
     override fun iterator(): Iterator<T> {
         return MappedIterator(typedResponse.iterator(), mapper)
@@ -16,10 +16,12 @@ class MappedResponse<T>(
         typedResponse.close()
     }
 
-    fun getMeta() = typedResponse.getMeta()
+    override fun getMeta() = typedResponse.getMeta()
 
-    fun getStatistic() = typedResponse.getStatistic()
+    override fun getStatistic() = typedResponse.getStatistic()
 
-    fun getRows(): Long = typedResponse.getRows()
+    override fun getRows(): Long = typedResponse.getRows()
+
+    override fun getRowsBeforeLimitAtLeast(): Long? = typedResponse.getRowsBeforeLimitAtLeast()
 
 }

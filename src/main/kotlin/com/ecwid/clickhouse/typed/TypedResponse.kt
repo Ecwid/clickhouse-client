@@ -1,25 +1,28 @@
 package com.ecwid.clickhouse.typed
 
-import com.ecwid.clickhouse.raw.RawResponse
+import com.ecwid.clickhouse.ClickHouseResponse
+import com.ecwid.clickhouse.raw.RawRow
 import java.util.*
 
-class TypedResponse(
-    private val rawResponse: RawResponse,
+internal class TypedResponse(
+    private val rawResponse: ClickHouseResponse<RawRow>,
     private val defaultTimeZone: TimeZone
-) : Iterable<TypedRow>, AutoCloseable {
+) : ClickHouseResponse<TypedRow> {
 
     override fun iterator(): Iterator<TypedRow> {
-        return TypedIterator(rawResponse.getMeta(), rawResponse.iterator(), defaultTimeZone)
+        return TypedIterator(rawResponse.iterator(), defaultTimeZone)
     }
 
     override fun close() {
         rawResponse.close()
     }
 
-    fun getMeta() = rawResponse.getMeta()
+    override fun getMeta() = rawResponse.getMeta()
 
-    fun getStatistic() = rawResponse.getStatistic()
+    override fun getStatistic() = rawResponse.getStatistic()
 
-    fun getRows(): Long = rawResponse.getRows()
+    override fun getRows(): Long = rawResponse.getRows()
+
+    override fun getRowsBeforeLimitAtLeast(): Long? = rawResponse.getRowsBeforeLimitAtLeast()
 
 }

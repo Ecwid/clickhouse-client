@@ -14,7 +14,7 @@ internal data class StringContent(val string: String) : Content {
     override fun asStream() = string.byteInputStream()
 
     override fun close() {
-
+        // nothing to close for string content
     }
 }
 

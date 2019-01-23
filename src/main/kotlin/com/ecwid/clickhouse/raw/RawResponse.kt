@@ -1,18 +1,20 @@
 package com.ecwid.clickhouse.raw
 
+import com.ecwid.clickhouse.ClickHouseResponse
 import com.ecwid.clickhouse.Meta
 import com.ecwid.clickhouse.Statistics
 import com.ecwid.clickhouse.transport.HttpResponse
 import com.google.gson.stream.JsonReader
 
-class RawResponse(private val httpResponse: HttpResponse) : AutoCloseable, Iterable<RawRow> {
+internal class RawResponse(private val httpResponse: HttpResponse) : ClickHouseResponse<RawRow> {
 
     private val jsonReader = JsonReader(httpResponse.content.asReader())
-    private var iterationAllowed = false
+    private var iterationState = IterationState.BEFORE_ITERATION
 
     private val meta: Meta
     private var statistic: Statistics? = null
     private var rows: Long? = null
+    private var rowsBeforeLimitAtLeast: Long? = null
 
     init {
         // start first iteration
@@ -31,11 +33,11 @@ class RawResponse(private val httpResponse: HttpResponse) : AutoCloseable, Itera
             "'data' object not found"
         }
         jsonReader.beginArray()
-        iterationAllowed = true
+        iterationState = IterationState.READY_TO_ITERATION
     }
 
     override fun iterator(): Iterator<RawRow> {
-        check(iterationAllowed) {
+        check(iterationState == IterationState.READY_TO_ITERATION) {
             "You can iterate over ClickHouse response only once."
         }
 
@@ -48,47 +50,67 @@ class RawResponse(private val httpResponse: HttpResponse) : AutoCloseable, Itera
 
     internal fun completeIteration() {
         // close 'data' section in json
-        iterationAllowed = false
+        iterationState = IterationState.AFTER_ITERATION
         jsonReader.endArray()
 
-        // rows section
-        val rowsKey = jsonReader.nextName()
-        check(rowsKey == "rows") {
-            "'rows' object not found"
-        }
-        this.rows = jsonReader.nextLong()
+        // read other sections
+        while (jsonReader.hasNext()) {
+            val keyName = jsonReader.nextName()
+            when (keyName) {
+                "rows" -> {
+                    this.rows = jsonReader.nextLong()
+                }
 
-        // stats
-        val statsName = jsonReader.nextName()
-        check(statsName == "statistics") {
-            "'statistics' object not found"
-        }
-        this.statistic = readStatistics(jsonReader)
+                "statistics" -> {
+                    this.statistic = readStatistics(jsonReader)
+                }
 
+                "rows_before_limit_at_least" -> {
+                    this.rowsBeforeLimitAtLeast = jsonReader.nextLong()
+                }
+            }
+        }
+
+        // complete response reading
         jsonReader.endObject()
     }
 
 
     // setters/getters
+    override fun getMeta(): Meta {
+        // Meta is always available, we can read it before response iteration
+        // So no checks are needed
+        return meta
+    }
 
-    fun getMeta() = meta
-
-    fun getStatistic(): Statistics {
-        val stats = statistic
-
-        checkNotNull(stats) {
+    override fun getStatistic(): Statistics {
+        check(iterationState == IterationState.AFTER_ITERATION) {
             "Statistic isn't available yet, please read all data rows first"
         }
 
-        return stats
+        return requireNotNull(statistic)
     }
 
-    fun getRows(): Long {
-        val r = this.rows
-        checkNotNull(r) {
+    override fun getRows(): Long {
+        check(iterationState == IterationState.AFTER_ITERATION) {
             "Rows isn't available yet, please read all data rows first"
         }
 
-        return r
+        return requireNotNull(rows)
     }
+
+    override fun getRowsBeforeLimitAtLeast(): Long? {
+        check(iterationState == IterationState.AFTER_ITERATION) {
+            "RowsBeforeLimitAtLeast isn't available yet, please read all data rows first"
+        }
+
+        return rowsBeforeLimitAtLeast
+    }
+
+}
+
+private enum class IterationState {
+    BEFORE_ITERATION,
+    READY_TO_ITERATION,
+    AFTER_ITERATION
 }

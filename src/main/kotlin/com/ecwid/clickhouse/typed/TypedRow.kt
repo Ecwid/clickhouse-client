@@ -1,13 +1,10 @@
 package com.ecwid.clickhouse.typed
 
-import com.ecwid.clickhouse.Meta
-import com.ecwid.clickhouse.Type
 import com.ecwid.clickhouse.raw.RawRow
 import java.math.BigDecimal
 import java.util.*
 
 data class TypedRow(
-    private val meta: Meta,
     private val defaultTimeZone: TimeZone,
     private val rawRow: RawRow
 ) {
