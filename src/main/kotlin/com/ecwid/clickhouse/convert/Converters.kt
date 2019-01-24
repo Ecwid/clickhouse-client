@@ -6,12 +6,12 @@ abstract class BaseConverter<T> {
 
     internal abstract fun convertFromString(string: String): T
 
-    fun to(str: String?): T {
+    fun toValue(str: String?): T {
         requireNotNull(str)
         return convertFromString(str)
     }
 
-    fun toNullable(str: String?): T? {
+    fun toNullableValue(str: String?): T? {
         return if (str == null) {
             null
         } else {
@@ -20,11 +20,11 @@ abstract class BaseConverter<T> {
     }
 
     fun toArray(array: List<String?>): List<T> {
-        return array.map(::to)
+        return array.map(::toValue)
     }
 
     fun toNullableArray(array: List<String?>): List<T?> {
-        return array.map(::toNullable)
+        return array.map(::toNullableValue)
     }
 }
 
@@ -32,12 +32,12 @@ abstract class DateConverter {
 
     abstract fun convertFromString(string: String, timeZone: TimeZone): Date
 
-    fun to(str: String?, timeZone: TimeZone): Date {
+    fun toValue(str: String?, timeZone: TimeZone): Date {
         requireNotNull(str)
         return convertFromString(str, timeZone)
     }
 
-    fun toNullable(str: String?, timeZone: TimeZone): Date? {
+    fun toNullableValue(str: String?, timeZone: TimeZone): Date? {
         return if (str == null) {
             null
         } else {
@@ -46,27 +46,27 @@ abstract class DateConverter {
     }
 
     fun toArray(array: List<String?>, timeZone: TimeZone): List<Date> {
-        return array.map { to(it, timeZone) }
+        return array.map { toValue(it, timeZone) }
     }
 
     fun toNullableArray(array: List<String?>, timeZone: TimeZone): List<Date?> {
-        return array.map { toNullable(it, timeZone) }
+        return array.map { toNullableValue(it, timeZone) }
     }
 }
 
 open class StringConverter {
 
-    fun to(str: String?): String {
+    fun toValue(str: String?): String {
         requireNotNull(str)
         return str
     }
 
-    fun toNullable(str: String?): String? {
+    fun toNullableValue(str: String?): String? {
         return str
     }
 
     fun toArray(array: List<String?>): List<String> {
-        return array.map(::to)
+        return array.map(::toValue)
     }
 
     fun toNullableArray(array: List<String?>): List<String?> {

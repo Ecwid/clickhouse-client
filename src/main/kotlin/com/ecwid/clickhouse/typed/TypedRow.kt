@@ -13,7 +13,7 @@ data class TypedRow(
     // ----------------- INT_8 --------------------
     fun getInt8(columnIndex: Int): Byte {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int8.to(scalar)
+        return Convert.Int8.toValue(scalar)
     }
 
     fun getInt8Array(columnIndex: Int): List<Byte> {
@@ -23,7 +23,7 @@ data class TypedRow(
 
     fun getInt8Nullable(columnIndex: Int): Byte? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int8.toNullable(scalar)
+        return Convert.Int8.toNullableValue(scalar)
     }
 
     fun getInt8NullableArray(columnIndex: Int): List<Byte?> {
@@ -33,7 +33,7 @@ data class TypedRow(
 
     fun getInt8(columnName: String): Byte {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int8.to(scalar)
+        return Convert.Int8.toValue(scalar)
     }
 
     fun getInt8Array(columnName: String): List<Byte> {
@@ -43,7 +43,7 @@ data class TypedRow(
 
     fun getInt8Nullable(columnName: String): Byte? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int8.toNullable(scalar)
+        return Convert.Int8.toNullableValue(scalar)
     }
 
     fun getInt8NullableArray(columnName: String): List<Byte?> {
@@ -55,7 +55,7 @@ data class TypedRow(
 
     fun getInt16(columnIndex: Int): Short {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int16.to(scalar)
+        return Convert.Int16.toValue(scalar)
     }
 
     fun getInt16Array(columnIndex: Int): List<Short> {
@@ -65,7 +65,7 @@ data class TypedRow(
 
     fun getInt16Nullable(columnIndex: Int): Short? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int16.toNullable(scalar)
+        return Convert.Int16.toNullableValue(scalar)
     }
 
     fun getInt16NullableArray(columnIndex: Int): List<Short?> {
@@ -75,7 +75,7 @@ data class TypedRow(
 
     fun getInt16(columnName: String): Short {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int16.to(scalar)
+        return Convert.Int16.toValue(scalar)
     }
 
     fun getInt16Array(columnName: String): List<Short> {
@@ -85,7 +85,7 @@ data class TypedRow(
 
     fun getInt16Nullable(columnName: String): Short? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int16.toNullable(scalar)
+        return Convert.Int16.toNullableValue(scalar)
     }
 
     fun getInt16NullableArray(columnName: String): List<Short?> {
@@ -97,7 +97,7 @@ data class TypedRow(
 
     fun getInt32(columnIndex: Int): Int {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getInt32Array(columnIndex: Int): List<Int> {
@@ -107,7 +107,7 @@ data class TypedRow(
 
     fun getInt32Nullable(columnIndex: Int): Int? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getInt32NullableArray(columnIndex: Int): List<Int?> {
@@ -117,7 +117,7 @@ data class TypedRow(
 
     fun getInt32(columnName: String): Int {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getInt32Array(columnName: String): List<Int> {
@@ -127,7 +127,7 @@ data class TypedRow(
 
     fun getInt32Nullable(columnName: String): Int? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getInt32NullableArray(columnName: String): List<Int?> {
@@ -139,7 +139,7 @@ data class TypedRow(
 
     fun getInt64(columnIndex: Int): Long {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int64.to(scalar)
+        return Convert.Int64.toValue(scalar)
     }
 
     fun getInt64Array(columnIndex: Int): List<Long> {
@@ -149,7 +149,7 @@ data class TypedRow(
 
     fun getInt64Nullable(columnIndex: Int): Long? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int64.toNullable(scalar)
+        return Convert.Int64.toNullableValue(scalar)
     }
 
     fun getInt64NullableArray(columnIndex: Int): List<Long?> {
@@ -159,7 +159,7 @@ data class TypedRow(
 
     fun getInt64(columnName: String): Long {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int64.to(scalar)
+        return Convert.Int64.toValue(scalar)
     }
 
     fun getInt64Array(columnName: String): List<Long> {
@@ -169,7 +169,7 @@ data class TypedRow(
 
     fun getInt64Nullable(columnName: String): Long? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int64.toNullable(scalar)
+        return Convert.Int64.toNullableValue(scalar)
     }
 
     fun getInt64NullableArray(columnName: String): List<Long?> {
@@ -181,7 +181,7 @@ data class TypedRow(
 
     fun getUInt8(columnIndex: Int): Int {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getUInt8Array(columnIndex: Int): List<Int> {
@@ -191,7 +191,7 @@ data class TypedRow(
 
     fun getUInt8Nullable(columnIndex: Int): Int? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getUInt8NullableArray(columnIndex: Int): List<Int?> {
@@ -201,7 +201,7 @@ data class TypedRow(
 
     fun getUInt8(columnName: String): Int {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getUInt8Array(columnName: String): List<Int> {
@@ -211,7 +211,7 @@ data class TypedRow(
 
     fun getUInt8Nullable(columnName: String): Int? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getUInt8NullableArray(columnName: String): List<Int?> {
@@ -223,7 +223,7 @@ data class TypedRow(
 
     fun getUInt16(columnIndex: Int): Int {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getUInt16Array(columnIndex: Int): List<Int> {
@@ -233,7 +233,7 @@ data class TypedRow(
 
     fun getUInt16Nullable(columnIndex: Int): Int? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getUInt16NullableArray(columnIndex: Int): List<Int?> {
@@ -243,7 +243,7 @@ data class TypedRow(
 
     fun getUInt16(columnName: String): Int {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.to(scalar)
+        return Convert.Int32.toValue(scalar)
     }
 
     fun getUInt16Array(columnName: String): List<Int> {
@@ -253,7 +253,7 @@ data class TypedRow(
 
     fun getUInt16Nullable(columnName: String): Int? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Int32.toNullable(scalar)
+        return Convert.Int32.toNullableValue(scalar)
     }
 
     fun getUInt16NullableArray(columnName: String): List<Int?> {
@@ -265,7 +265,7 @@ data class TypedRow(
 
     fun getUInt32(columnIndex: Int): Int {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.UInt32.to(scalar)
+        return Convert.UInt32.toValue(scalar)
     }
 
     fun getUInt32Array(columnIndex: Int): List<Int> {
@@ -275,7 +275,7 @@ data class TypedRow(
 
     fun getUInt32Nullable(columnIndex: Int): Int? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.UInt32.toNullable(scalar)
+        return Convert.UInt32.toNullableValue(scalar)
     }
 
     fun getUInt32NullableArray(columnIndex: Int): List<Int?> {
@@ -285,7 +285,7 @@ data class TypedRow(
 
     fun getUInt32(columnName: String): Int {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.UInt32.to(scalar)
+        return Convert.UInt32.toValue(scalar)
     }
 
     fun getUInt32Array(columnName: String): List<Int> {
@@ -295,7 +295,7 @@ data class TypedRow(
 
     fun getUInt32Nullable(columnName: String): Int? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.UInt32.toNullable(scalar)
+        return Convert.UInt32.toNullableValue(scalar)
     }
 
     fun getUInt32NullableArray(columnName: String): List<Int?> {
@@ -306,7 +306,7 @@ data class TypedRow(
 
     fun getUInt64(columnIndex: Int): Long {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.UInt64.to(scalar)
+        return Convert.UInt64.toValue(scalar)
     }
 
     fun getUInt64Array(columnIndex: Int): List<Long> {
@@ -316,7 +316,7 @@ data class TypedRow(
 
     fun getUInt64Nullable(columnIndex: Int): Long? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.UInt64.toNullable(scalar)
+        return Convert.UInt64.toNullableValue(scalar)
     }
 
     fun getUInt64NullableArray(columnIndex: Int): List<Long?> {
@@ -326,7 +326,7 @@ data class TypedRow(
 
     fun getUInt64(columnName: String): Long {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.UInt64.to(scalar)
+        return Convert.UInt64.toValue(scalar)
     }
 
     fun getUInt64Array(columnName: String): List<Long> {
@@ -336,7 +336,7 @@ data class TypedRow(
 
     fun getUInt64Nullable(columnName: String): Long? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.UInt64.toNullable(scalar)
+        return Convert.UInt64.toNullableValue(scalar)
     }
 
     fun getUInt64NullableArray(columnName: String): List<Long?> {
@@ -347,7 +347,7 @@ data class TypedRow(
     // ----------------- FLOAT_32 --------------------
     fun getFloat32(columnIndex: Int): Float {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Float32.to(scalar)
+        return Convert.Float32.toValue(scalar)
     }
 
     fun getFloat32Array(columnIndex: Int): List<Float> {
@@ -357,7 +357,7 @@ data class TypedRow(
 
     fun getFloat32Nullable(columnIndex: Int): Float? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Float32.toNullable(scalar)
+        return Convert.Float32.toNullableValue(scalar)
     }
 
     fun getFloat32NullableArray(columnIndex: Int): List<Float?> {
@@ -367,7 +367,7 @@ data class TypedRow(
 
     fun getFloat32(columnName: String): Float {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Float32.to(scalar)
+        return Convert.Float32.toValue(scalar)
     }
 
     fun getFloat32Array(columnName: String): List<Float> {
@@ -377,7 +377,7 @@ data class TypedRow(
 
     fun getFloat32Nullable(columnName: String): Float? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Float32.toNullable(scalar)
+        return Convert.Float32.toNullableValue(scalar)
     }
 
     fun getFloat32NullableArray(columnName: String): List<Float?> {
@@ -389,7 +389,7 @@ data class TypedRow(
 
     fun getFloat64(columnIndex: Int): Double {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Float64.to(scalar)
+        return Convert.Float64.toValue(scalar)
     }
 
     fun getFloat64Array(columnIndex: Int): List<Double> {
@@ -399,7 +399,7 @@ data class TypedRow(
 
     fun getFloat64Nullable(columnIndex: Int): Double? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Float64.toNullable(scalar)
+        return Convert.Float64.toNullableValue(scalar)
     }
 
     fun getFloat64NullableArray(columnIndex: Int): List<Double?> {
@@ -409,7 +409,7 @@ data class TypedRow(
 
     fun getFloat64(columnName: String): Double {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Float64.to(scalar)
+        return Convert.Float64.toValue(scalar)
     }
 
     fun getFloat64Array(columnName: String): List<Double> {
@@ -419,7 +419,7 @@ data class TypedRow(
 
     fun getFloat64Nullable(columnName: String): Double? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Float64.toNullable(scalar)
+        return Convert.Float64.toNullableValue(scalar)
     }
 
     fun getFloat64NullableArray(columnName: String): List<Double?> {
@@ -430,7 +430,7 @@ data class TypedRow(
     // ----------------- STRING --------------------
     fun getString(columnIndex: Int): String {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Str.to(scalar)
+        return Convert.Str.toValue(scalar)
     }
 
     fun getStringArray(columnIndex: Int): List<String> {
@@ -440,7 +440,7 @@ data class TypedRow(
 
     fun getStringNullable(columnIndex: Int): String? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Str.toNullable(scalar)
+        return Convert.Str.toNullableValue(scalar)
     }
 
     fun getStringNullableArray(columnIndex: Int): List<String?> {
@@ -450,7 +450,7 @@ data class TypedRow(
 
     fun getString(columnName: String): String {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Str.to(scalar)
+        return Convert.Str.toValue(scalar)
     }
 
     fun getStringArray(columnName: String): List<String> {
@@ -460,7 +460,7 @@ data class TypedRow(
 
     fun getStringNullable(columnName: String): String? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Str.toNullable(scalar)
+        return Convert.Str.toNullableValue(scalar)
     }
 
     fun getStringNullableArray(columnName: String): List<String?> {
@@ -472,12 +472,12 @@ data class TypedRow(
 
     fun getDateTime(columnIndex: Int): Date {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.DateTime.to(scalar, defaultTimeZone)
+        return Convert.DateTime.toValue(scalar, defaultTimeZone)
     }
 
     fun getDateTime(columnIndex: Int, timeZone: TimeZone): Date {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.DateTime.to(scalar, timeZone)
+        return Convert.DateTime.toValue(scalar, timeZone)
     }
 
     fun getDateTimeArray(columnIndex: Int): List<Date> {
@@ -492,12 +492,12 @@ data class TypedRow(
 
     fun getDateTimeNullable(columnIndex: Int): Date? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.DateTime.toNullable(scalar, defaultTimeZone)
+        return Convert.DateTime.toNullableValue(scalar, defaultTimeZone)
     }
 
     fun getDateTimeNullable(columnIndex: Int, timeZone: TimeZone): Date? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.DateTime.toNullable(scalar, timeZone)
+        return Convert.DateTime.toNullableValue(scalar, timeZone)
     }
 
     fun getDateTimeNullableArray(columnIndex: Int): List<Date?> {
@@ -512,12 +512,12 @@ data class TypedRow(
 
     fun getDateTime(columnName: String): Date {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.DateTime.to(scalar, defaultTimeZone)
+        return Convert.DateTime.toValue(scalar, defaultTimeZone)
     }
 
     fun getDateTime(columnName: String, timeZone: TimeZone): Date {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.DateTime.to(scalar, timeZone)
+        return Convert.DateTime.toValue(scalar, timeZone)
     }
 
     fun getDateTimeArray(columnName: String): List<Date> {
@@ -532,12 +532,12 @@ data class TypedRow(
 
     fun getDateTimeNullable(columnName: String): Date? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.DateTime.toNullable(scalar, defaultTimeZone)
+        return Convert.DateTime.toNullableValue(scalar, defaultTimeZone)
     }
 
     fun getDateTimeNullable(columnName: String, timeZone: TimeZone): Date? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.DateTime.toNullable(scalar, timeZone)
+        return Convert.DateTime.toNullableValue(scalar, timeZone)
     }
 
     fun getDateTimeNullableArray(columnName: String): List<Date?> {
@@ -553,12 +553,12 @@ data class TypedRow(
 
     fun getDate(columnIndex: Int): Date {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Date.to(scalar, defaultTimeZone)
+        return Convert.Date.toValue(scalar, defaultTimeZone)
     }
 
     fun getDate(columnIndex: Int, timeZone: TimeZone): Date {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Date.to(scalar, timeZone)
+        return Convert.Date.toValue(scalar, timeZone)
     }
 
     fun getDateArray(columnIndex: Int): List<Date> {
@@ -573,12 +573,12 @@ data class TypedRow(
 
     fun getDateNullable(columnIndex: Int): Date? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Date.toNullable(scalar, defaultTimeZone)
+        return Convert.Date.toNullableValue(scalar, defaultTimeZone)
     }
 
     fun getDateNullable(columnIndex: Int, timeZone: TimeZone): Date? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Date.toNullable(scalar, timeZone)
+        return Convert.Date.toNullableValue(scalar, timeZone)
     }
 
     fun getDateNullableArray(columnIndex: Int): List<Date?> {
@@ -593,12 +593,12 @@ data class TypedRow(
 
     fun getDate(columnName: String): Date {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Date.to(scalar, defaultTimeZone)
+        return Convert.Date.toValue(scalar, defaultTimeZone)
     }
 
     fun getDate(columnName: String, timeZone: TimeZone): Date {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Date.to(scalar, timeZone)
+        return Convert.Date.toValue(scalar, timeZone)
     }
 
     fun getDateArray(columnName: String): List<Date> {
@@ -613,12 +613,12 @@ data class TypedRow(
 
     fun getDateNullable(columnName: String): Date? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Date.toNullable(scalar, defaultTimeZone)
+        return Convert.Date.toNullableValue(scalar, defaultTimeZone)
     }
 
     fun getDateNullable(columnName: String, timeZone: TimeZone): Date? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Date.toNullable(scalar, timeZone)
+        return Convert.Date.toNullableValue(scalar, timeZone)
     }
 
     fun getDateNullableArray(columnName: String): List<Date?> {
@@ -635,7 +635,7 @@ data class TypedRow(
 
     fun getDecimal(columnIndex: Int): BigDecimal {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Decimal.to(scalar)
+        return Convert.Decimal.toValue(scalar)
     }
 
     fun getDecimalArray(columnIndex: Int): List<BigDecimal> {
@@ -645,7 +645,7 @@ data class TypedRow(
 
     fun getDecimalNullable(columnIndex: Int): BigDecimal? {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Decimal.toNullable(scalar)
+        return Convert.Decimal.toNullableValue(scalar)
     }
 
     fun getDecimalNullableArray(columnIndex: Int): List<BigDecimal?> {
@@ -655,7 +655,7 @@ data class TypedRow(
 
     fun getDecimal(columnName: String): BigDecimal {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Decimal.to(scalar)
+        return Convert.Decimal.toValue(scalar)
     }
 
     fun getDecimalArray(columnName: String): List<BigDecimal> {
@@ -665,7 +665,7 @@ data class TypedRow(
 
     fun getDecimalNullable(columnName: String): BigDecimal? {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Decimal.toNullable(scalar)
+        return Convert.Decimal.toNullableValue(scalar)
     }
 
     fun getDecimalNullableArray(columnName: String): List<BigDecimal?> {
