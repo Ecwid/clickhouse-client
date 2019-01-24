@@ -1,5 +1,6 @@
 package com.ecwid.clickhouse.typed
 
+import com.ecwid.clickhouse.convert.*
 import com.ecwid.clickhouse.raw.RawRow
 import java.math.BigDecimal
 import java.util.*
@@ -11,601 +12,665 @@ data class TypedRow(
 
     // ----------------- INT_8 --------------------
     fun getInt8(columnIndex: Int): Byte {
-        return rawRow.getScalarValue(columnIndex).toInt8()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int8.to(scalar)
     }
 
     fun getInt8Array(columnIndex: Int): List<Byte> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt8)
+        return Convert.Int8.toArray(array)
     }
 
     fun getInt8Nullable(columnIndex: Int): Byte? {
-        return rawRow.getScalarValue(columnIndex)?.toInt8Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int8.toNullable(scalar)
     }
 
     fun getInt8NullableArray(columnIndex: Int): List<Byte?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt8Nullable)
+        return Convert.Int8.toNullableArray(array)
     }
 
     fun getInt8(columnName: String): Byte {
-        return rawRow.getScalarValue(columnName).toInt8()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int8.to(scalar)
     }
 
     fun getInt8Array(columnName: String): List<Byte> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt8)
+        return Convert.Int8.toArray(array)
     }
 
     fun getInt8Nullable(columnName: String): Byte? {
-        return rawRow.getScalarValue(columnName).toInt8Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int8.toNullable(scalar)
     }
 
     fun getInt8NullableArray(columnName: String): List<Byte?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt8Nullable)
+        return Convert.Int8.toNullableArray(array)
     }
 
-    // ----------------- INT_8 --------------------
+    // ----------------- INT_16 --------------------
 
     fun getInt16(columnIndex: Int): Short {
-        return rawRow.getScalarValue(columnIndex).toInt16()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int16.to(scalar)
     }
 
     fun getInt16Array(columnIndex: Int): List<Short> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt16)
+        return Convert.Int16.toArray(array)
     }
 
     fun getInt16Nullable(columnIndex: Int): Short? {
-        return rawRow.getScalarValue(columnIndex)?.toInt16Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int16.toNullable(scalar)
     }
 
     fun getInt16NullableArray(columnIndex: Int): List<Short?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt16Nullable)
+        return Convert.Int16.toNullableArray(array)
     }
 
     fun getInt16(columnName: String): Short {
-        return rawRow.getScalarValue(columnName).toInt16()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int16.to(scalar)
     }
 
     fun getInt16Array(columnName: String): List<Short> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt16)
+        return Convert.Int16.toArray(array)
     }
 
     fun getInt16Nullable(columnName: String): Short? {
-        return rawRow.getScalarValue(columnName).toInt16Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int16.toNullable(scalar)
     }
 
     fun getInt16NullableArray(columnName: String): List<Short?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt16Nullable)
+        return Convert.Int16.toNullableArray(array)
     }
 
     // ----------------- INT_32 --------------------
 
     fun getInt32(columnIndex: Int): Int {
-        return rawRow.getScalarValue(columnIndex).toInt32()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.to(scalar)
     }
 
     fun getInt32Array(columnIndex: Int): List<Int> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getInt32Nullable(columnIndex: Int): Int? {
-        return rawRow.getScalarValue(columnIndex)?.toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getInt32NullableArray(columnIndex: Int): List<Int?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     fun getInt32(columnName: String): Int {
-        return rawRow.getScalarValue(columnName).toInt32()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.to(scalar)
     }
 
     fun getInt32Array(columnName: String): List<Int> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getInt32Nullable(columnName: String): Int? {
-        return rawRow.getScalarValue(columnName).toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getInt32NullableArray(columnName: String): List<Int?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     // ----------------- INT_64 --------------------
 
     fun getInt64(columnIndex: Int): Long {
-        return rawRow.getScalarValue(columnIndex).toInt64()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int64.to(scalar)
     }
 
     fun getInt64Array(columnIndex: Int): List<Long> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt64)
+        return Convert.Int64.toArray(array)
     }
 
     fun getInt64Nullable(columnIndex: Int): Long? {
-        return rawRow.getScalarValue(columnIndex)?.toInt64Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int64.toNullable(scalar)
     }
 
     fun getInt64NullableArray(columnIndex: Int): List<Long?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt64Nullable)
+        return Convert.Int64.toNullableArray(array)
     }
 
     fun getInt64(columnName: String): Long {
-        return rawRow.getScalarValue(columnName).toInt64()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int64.to(scalar)
     }
 
     fun getInt64Array(columnName: String): List<Long> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt64)
+        return Convert.Int64.toArray(array)
     }
 
     fun getInt64Nullable(columnName: String): Long? {
-        return rawRow.getScalarValue(columnName).toInt64Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int64.toNullable(scalar)
     }
 
     fun getInt64NullableArray(columnName: String): List<Long?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt64Nullable)
+        return Convert.Int64.toNullableArray(array)
     }
 
     // ----------------- UINT_8 --------------------
 
     fun getUInt8(columnIndex: Int): Int {
-        return rawRow.getScalarValue(columnIndex).toInt32()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.to(scalar)
     }
 
     fun getUInt8Array(columnIndex: Int): List<Int> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getUInt8Nullable(columnIndex: Int): Int? {
-        return rawRow.getScalarValue(columnIndex)?.toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getUInt8NullableArray(columnIndex: Int): List<Int?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     fun getUInt8(columnName: String): Int {
-        return rawRow.getScalarValue(columnName).toInt32()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.to(scalar)
     }
 
     fun getUInt8Array(columnName: String): List<Int> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getUInt8Nullable(columnName: String): Int? {
-        return rawRow.getScalarValue(columnName).toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getUInt8NullableArray(columnName: String): List<Int?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     // ----------------- UINT_16 --------------------
 
     fun getUInt16(columnIndex: Int): Int {
-        return rawRow.getScalarValue(columnIndex).toInt32()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.to(scalar)
     }
 
     fun getUInt16Array(columnIndex: Int): List<Int> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getUInt16Nullable(columnIndex: Int): Int? {
-        return rawRow.getScalarValue(columnIndex)?.toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getUInt16NullableArray(columnIndex: Int): List<Int?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     fun getUInt16(columnName: String): Int {
-        return rawRow.getScalarValue(columnName).toInt32()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.to(scalar)
     }
 
     fun getUInt16Array(columnName: String): List<Int> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32)
+        return Convert.Int32.toArray(array)
     }
 
     fun getUInt16Nullable(columnName: String): Int? {
-        return rawRow.getScalarValue(columnName).toInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Int32.toNullable(scalar)
     }
 
     fun getUInt16NullableArray(columnName: String): List<Int?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toInt32Nullable)
+        return Convert.Int32.toNullableArray(array)
     }
 
     // ----------------- UINT_32 --------------------
 
     fun getUInt32(columnIndex: Int): Int {
-        return rawRow.getScalarValue(columnIndex).toUInt32()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.UInt32.to(scalar)
     }
 
     fun getUInt32Array(columnIndex: Int): List<Int> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toUInt32)
+        return Convert.UInt32.toArray(array)
     }
 
     fun getUInt32Nullable(columnIndex: Int): Int? {
-        return rawRow.getScalarValue(columnIndex)?.toUInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.UInt32.toNullable(scalar)
     }
 
     fun getUInt32NullableArray(columnIndex: Int): List<Int?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toUInt32Nullable)
+        return Convert.UInt32.toNullableArray(array)
     }
 
     fun getUInt32(columnName: String): Int {
-        return rawRow.getScalarValue(columnName).toUInt32()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.UInt32.to(scalar)
     }
 
     fun getUInt32Array(columnName: String): List<Int> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toUInt32)
+        return Convert.UInt32.toArray(array)
     }
 
     fun getUInt32Nullable(columnName: String): Int? {
-        return rawRow.getScalarValue(columnName).toUInt32Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.UInt32.toNullable(scalar)
     }
 
     fun getUInt32NullableArray(columnName: String): List<Int?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toUInt32Nullable)
+        return Convert.UInt32.toNullableArray(array)
     }
     // ----------------- UINT_64 --------------------
 
     fun getUInt64(columnIndex: Int): Long {
-        return rawRow.getScalarValue(columnIndex).toUInt64()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.UInt64.to(scalar)
     }
 
     fun getUInt64Array(columnIndex: Int): List<Long> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toUInt64)
+        return Convert.UInt64.toArray(array)
     }
 
     fun getUInt64Nullable(columnIndex: Int): Long? {
-        return rawRow.getScalarValue(columnIndex)?.toUInt64Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.UInt64.toNullable(scalar)
     }
 
     fun getUInt64NullableArray(columnIndex: Int): List<Long?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toUInt64Nullable)
+        return Convert.UInt64.toNullableArray(array)
     }
 
     fun getUInt64(columnName: String): Long {
-        return rawRow.getScalarValue(columnName).toUInt64()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.UInt64.to(scalar)
     }
 
     fun getUInt64Array(columnName: String): List<Long> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toUInt64)
+        return Convert.UInt64.toArray(array)
     }
 
     fun getUInt64Nullable(columnName: String): Long? {
-        return rawRow.getScalarValue(columnName).toUInt64Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.UInt64.toNullable(scalar)
     }
 
     fun getUInt64NullableArray(columnName: String): List<Long?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toUInt64Nullable)
+        return Convert.UInt64.toNullableArray(array)
     }
 
     // ----------------- FLOAT_32 --------------------
     fun getFloat32(columnIndex: Int): Float {
-        return rawRow.getScalarValue(columnIndex).toFloat32()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Float32.to(scalar)
     }
 
     fun getFloat32Array(columnIndex: Int): List<Float> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toFloat32)
+        return Convert.Float32.toArray(array)
     }
 
     fun getFloat32Nullable(columnIndex: Int): Float? {
-        return rawRow.getScalarValue(columnIndex)?.toFloat32Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Float32.toNullable(scalar)
     }
 
     fun getFloat32NullableArray(columnIndex: Int): List<Float?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toFloat32Nullable)
+        return Convert.Float32.toNullableArray(array)
     }
 
     fun getFloat32(columnName: String): Float {
-        return rawRow.getScalarValue(columnName).toFloat32()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Float32.to(scalar)
     }
 
     fun getFloat32Array(columnName: String): List<Float> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toFloat32)
+        return Convert.Float32.toArray(array)
     }
 
     fun getFloat32Nullable(columnName: String): Float? {
-        return rawRow.getScalarValue(columnName).toFloat32Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Float32.toNullable(scalar)
     }
 
     fun getFloat32NullableArray(columnName: String): List<Float?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toFloat32Nullable)
+        return Convert.Float32.toNullableArray(array)
     }
 
     // ----------------- FLOAT_64 --------------------
 
     fun getFloat64(columnIndex: Int): Double {
-        return rawRow.getScalarValue(columnIndex).toFloat64()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Float64.to(scalar)
     }
 
     fun getFloat64Array(columnIndex: Int): List<Double> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toFloat64)
+        return Convert.Float64.toArray(array)
     }
 
     fun getFloat64Nullable(columnIndex: Int): Double? {
-        return rawRow.getScalarValue(columnIndex)?.toFloat64Nullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Float64.toNullable(scalar)
     }
 
     fun getFloat64NullableArray(columnIndex: Int): List<Double?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toFloat64Nullable)
+        return Convert.Float64.toNullableArray(array)
     }
 
     fun getFloat64(columnName: String): Double {
-        return rawRow.getScalarValue(columnName).toFloat64()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Float64.to(scalar)
     }
 
     fun getFloat64Array(columnName: String): List<Double> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toFloat64)
+        return Convert.Float64.toArray(array)
     }
 
     fun getFloat64Nullable(columnName: String): Double? {
-        return rawRow.getScalarValue(columnName).toFloat64Nullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Float64.toNullable(scalar)
     }
 
     fun getFloat64NullableArray(columnName: String): List<Double?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toFloat64Nullable)
+        return Convert.Float64.toNullableArray(array)
     }
 
     // ----------------- STRING --------------------
     fun getString(columnIndex: Int): String {
-        return requireNotNull(rawRow.getScalarValue(columnIndex))
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Str.to(scalar)
     }
 
     fun getStringArray(columnIndex: Int): List<String> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(::requireNotNull)
+        return Convert.Str.toArray(array)
     }
 
     fun getStringNullable(columnIndex: Int): String? {
-        return rawRow.getScalarValue(columnIndex)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Str.toNullable(scalar)
     }
 
     fun getStringNullableArray(columnIndex: Int): List<String?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array
+        return Convert.Str.toNullableArray(array)
     }
 
     fun getString(columnName: String): String {
-        return requireNotNull(rawRow.getScalarValue(columnName))
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Str.to(scalar)
     }
 
     fun getStringArray(columnName: String): List<String> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(::requireNotNull)
+        return Convert.Str.toArray(array)
     }
 
     fun getStringNullable(columnName: String): String? {
-        return rawRow.getScalarValue(columnName)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Str.toNullable(scalar)
     }
 
     fun getStringNullableArray(columnName: String): List<String?> {
         val array = rawRow.getArrayValue(columnName)
-        return array
+        return Convert.Str.toNullableArray(array)
     }
 
     // ----------------- DATETIME --------------------
 
     fun getDateTime(columnIndex: Int): Date {
-        return rawRow.getScalarValue(columnIndex).toDateTime(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.DateTime.to(scalar, defaultTimeZone)
     }
 
     fun getDateTime(columnIndex: Int, timeZone: TimeZone): Date {
-        return rawRow.getScalarValue(columnIndex).toDateTime(timeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.DateTime.to(scalar, timeZone)
     }
 
     fun getDateTimeArray(columnIndex: Int): List<Date> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateTime(defaultTimeZone) }
+        return Convert.DateTime.toArray(array, defaultTimeZone)
     }
 
     fun getDateTimeArray(columnIndex: Int, timeZone: TimeZone): List<Date> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateTime(timeZone) }
+        return Convert.DateTime.toArray(array, timeZone)
     }
 
     fun getDateTimeNullable(columnIndex: Int): Date? {
-        return rawRow.getScalarValue(columnIndex)?.toDateTimeNullable(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.DateTime.toNullable(scalar, defaultTimeZone)
     }
 
     fun getDateTimeNullable(columnIndex: Int, timeZone: TimeZone): Date? {
-        return rawRow.getScalarValue(columnIndex)?.toDateTimeNullable(timeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.DateTime.toNullable(scalar, timeZone)
     }
 
     fun getDateTimeNullableArray(columnIndex: Int): List<Date?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateTimeNullable(defaultTimeZone) }
+        return Convert.DateTime.toNullableArray(array, defaultTimeZone)
     }
 
     fun getDateTimeNullableArray(columnIndex: Int, timeZone: TimeZone): List<Date?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateTimeNullable(timeZone) }
+        return Convert.DateTime.toNullableArray(array, timeZone)
     }
 
     fun getDateTime(columnName: String): Date {
-        return rawRow.getScalarValue(columnName).toDateTime(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.DateTime.to(scalar, defaultTimeZone)
     }
 
     fun getDateTime(columnName: String, timeZone: TimeZone): Date {
-        return rawRow.getScalarValue(columnName).toDateTime(timeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.DateTime.to(scalar, timeZone)
     }
 
     fun getDateTimeArray(columnName: String): List<Date> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateTime(defaultTimeZone) }
+        return Convert.DateTime.toArray(array, defaultTimeZone)
     }
 
     fun getDateTimeArray(columnName: String, timeZone: TimeZone): List<Date> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateTime(timeZone) }
+        return Convert.DateTime.toArray(array, timeZone)
     }
 
     fun getDateTimeNullable(columnName: String): Date? {
-        return rawRow.getScalarValue(columnName).toDateTimeNullable(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.DateTime.toNullable(scalar, defaultTimeZone)
     }
 
     fun getDateTimeNullable(columnName: String, timeZone: TimeZone): Date? {
-        return rawRow.getScalarValue(columnName).toDateTimeNullable(timeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.DateTime.toNullable(scalar, timeZone)
     }
 
     fun getDateTimeNullableArray(columnName: String): List<Date?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateTimeNullable(defaultTimeZone) }
+        return Convert.DateTime.toArray(array, defaultTimeZone)
     }
 
     fun getDateTimeNullableArray(columnName: String, timeZone: TimeZone): List<Date?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateTimeNullable(timeZone) }
+        return Convert.DateTime.toArray(array, timeZone)
     }
     // ----------------- DATE --------------------
 
     fun getDate(columnIndex: Int): Date {
-        return rawRow.getScalarValue(columnIndex).toDate(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Date.to(scalar, defaultTimeZone)
     }
 
     fun getDate(columnIndex: Int, timeZone: TimeZone): Date {
-        return rawRow.getScalarValue(columnIndex).toDate(timeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Date.to(scalar, timeZone)
     }
 
     fun getDateArray(columnIndex: Int): List<Date> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDate(defaultTimeZone) }
+        return Convert.Date.toArray(array, defaultTimeZone)
     }
 
     fun getDateArray(columnIndex: Int, timeZone: TimeZone): List<Date> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDate(timeZone) }
+        return Convert.Date.toArray(array, timeZone)
     }
 
     fun getDateNullable(columnIndex: Int): Date? {
-        return rawRow.getScalarValue(columnIndex)?.toDateNullable(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Date.toNullable(scalar, defaultTimeZone)
     }
 
     fun getDateNullable(columnIndex: Int, timeZone: TimeZone): Date? {
-        return rawRow.getScalarValue(columnIndex)?.toDateNullable(timeZone)
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Date.toNullable(scalar, timeZone)
     }
 
     fun getDateNullableArray(columnIndex: Int): List<Date?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateNullable(defaultTimeZone) }
+        return Convert.Date.toNullableArray(array, defaultTimeZone)
     }
 
     fun getDateNullableArray(columnIndex: Int, timeZone: TimeZone): List<Date?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map { it.toDateNullable(timeZone) }
+        return Convert.Date.toNullableArray(array, timeZone)
     }
 
     fun getDate(columnName: String): Date {
-        return rawRow.getScalarValue(columnName).toDate(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Date.to(scalar, defaultTimeZone)
     }
 
     fun getDate(columnName: String, timeZone: TimeZone): Date {
-        return rawRow.getScalarValue(columnName).toDate(timeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Date.to(scalar, timeZone)
     }
 
     fun getDateArray(columnName: String): List<Date> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDate(defaultTimeZone) }
+        return Convert.Date.toArray(array, defaultTimeZone)
     }
 
     fun getDateArray(columnName: String, timeZone: TimeZone): List<Date> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDate(timeZone) }
+        return Convert.Date.toArray(array, timeZone)
     }
 
     fun getDateNullable(columnName: String): Date? {
-        return rawRow.getScalarValue(columnName).toDateNullable(defaultTimeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Date.toNullable(scalar, defaultTimeZone)
     }
 
     fun getDateNullable(columnName: String, timeZone: TimeZone): Date? {
-        return rawRow.getScalarValue(columnName).toDateNullable(timeZone)
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Date.toNullable(scalar, timeZone)
     }
 
     fun getDateNullableArray(columnName: String): List<Date?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateNullable(defaultTimeZone) }
+        return Convert.Date.toNullableArray(array, defaultTimeZone)
     }
 
     fun getDateNullableArray(columnName: String, timeZone: TimeZone): List<Date?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map { it.toDateNullable(timeZone) }
+        return Convert.Date.toNullableArray(array, timeZone)
     }
 
     // ----------------- DECIMAL --------------------
 
     fun getDecimal(columnIndex: Int): BigDecimal {
-        return rawRow.getScalarValue(columnIndex).toDecimal()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Decimal.to(scalar)
     }
 
     fun getDecimalArray(columnIndex: Int): List<BigDecimal> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toDecimal)
+        return Convert.Decimal.toArray(array)
     }
 
     fun getDecimalNullable(columnIndex: Int): BigDecimal? {
-        return rawRow.getScalarValue(columnIndex)?.toDecimalNullable()
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Decimal.toNullable(scalar)
     }
 
     fun getDecimalNullableArray(columnIndex: Int): List<BigDecimal?> {
         val array = rawRow.getArrayValue(columnIndex)
-        return array.map(String?::toDecimalNullable)
+        return Convert.Decimal.toNullableArray(array)
     }
 
     fun getDecimal(columnName: String): BigDecimal {
-        return rawRow.getScalarValue(columnName).toDecimal()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Decimal.to(scalar)
     }
 
     fun getDecimalArray(columnName: String): List<BigDecimal> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toDecimal)
+        return Convert.Decimal.toArray(array)
     }
 
     fun getDecimalNullable(columnName: String): BigDecimal? {
-        return rawRow.getScalarValue(columnName).toDecimalNullable()
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Decimal.toNullable(scalar)
     }
 
     fun getDecimalNullableArray(columnName: String): List<BigDecimal?> {
         val array = rawRow.getArrayValue(columnName)
-        return array.map(String?::toDecimalNullable)
+        return Convert.Decimal.toNullableArray(array)
     }
 
 }
