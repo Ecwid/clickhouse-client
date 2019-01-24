@@ -66,7 +66,7 @@ open class StringConverter {
     }
 
     fun toArray(array: List<String?>): List<String> {
-        return array.map(::toValue)
+        return array.requireNoNulls()
     }
 
     fun toNullableArray(array: List<String?>): List<String?> {
