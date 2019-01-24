@@ -46,9 +46,9 @@ internal fun readStatistics(reader: JsonReader): Statistics {
     }
     reader.endObject()
 
-    requireNotNull(elapsed) { "Wrong 'statisticsBlock' section in SELECT response - no 'elapsed' key found" }
-    requireNotNull(rowsRead) { "Wrong 'statisticsBlock' section in SELECT response - no 'rows_read' key found" }
-    requireNotNull(bytesRead) { "Wrong 'statisticsBlock' section in SELECT response - no 'bytes_read' key found" }
+    requireNotNull(elapsed) { "Wrong 'statistics' section in SELECT response - no 'elapsed' key found" }
+    requireNotNull(rowsRead) { "Wrong 'statistics' section in SELECT response - no 'rows_read' key found" }
+    requireNotNull(bytesRead) { "Wrong 'statistics' section in SELECT response - no 'bytes_read' key found" }
 
     return Statistics(elapsed, rowsRead, bytesRead)
 }
