@@ -20,9 +20,9 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
         return RawResponse(httpResponse)
     }
 
-    fun insert(host: String, table: String, fields: List<String>, values: List<List<String>>) {
+    fun insert(host: String, table: String, fields: List<String>, values: List<RawValues>) {
         if (values.isEmpty()) {
-            // no items to insert
+            // no rows to insert
             return
         }
 
@@ -34,7 +34,7 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
         val sql = values.joinToString(
             separator = ",",
             prefix = "insert into $table $fieldsClause values ",
-            transform = ::joinListToSqlValues
+            transform = RawValues::joinRawValuesToSqlValues
         )
 
         executeQuery(host, sql)
@@ -59,13 +59,6 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 
             throw ClickHouseHttpException(code, msg, content)
         }
-    }
-
-    private fun joinListToSqlValues(list: List<String>): String {
-        return list.joinToString(
-            prefix = "(",
-            postfix = ")"
-        )
     }
 
 }
