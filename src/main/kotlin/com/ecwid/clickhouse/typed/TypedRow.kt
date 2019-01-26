@@ -430,42 +430,36 @@ data class TypedRow(
     // ----------------- STRING --------------------
     fun getString(columnIndex: Int): String {
         val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Str.toValue(scalar)
+        return requireNotNull(scalar)
     }
 
     fun getStringArray(columnIndex: Int): List<String> {
-        val array = rawRow.getArrayValue(columnIndex)
-        return Convert.Str.toArray(array)
+        return rawRow.getArrayValue(columnIndex).requireNoNulls()
     }
 
     fun getStringNullable(columnIndex: Int): String? {
-        val scalar = rawRow.getScalarValue(columnIndex)
-        return Convert.Str.toNullableValue(scalar)
+        return rawRow.getScalarValue(columnIndex)
     }
 
     fun getStringNullableArray(columnIndex: Int): List<String?> {
-        val array = rawRow.getArrayValue(columnIndex)
-        return Convert.Str.toNullableArray(array)
+        return rawRow.getArrayValue(columnIndex)
     }
 
     fun getString(columnName: String): String {
         val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Str.toValue(scalar)
+        return requireNotNull(scalar)
     }
 
     fun getStringArray(columnName: String): List<String> {
-        val array = rawRow.getArrayValue(columnName)
-        return Convert.Str.toArray(array)
+        return rawRow.getArrayValue(columnName).requireNoNulls()
     }
 
     fun getStringNullable(columnName: String): String? {
-        val scalar = rawRow.getScalarValue(columnName)
-        return Convert.Str.toNullableValue(scalar)
+        return rawRow.getScalarValue(columnName)
     }
 
     fun getStringNullableArray(columnName: String): List<String?> {
-        val array = rawRow.getArrayValue(columnName)
-        return Convert.Str.toNullableArray(array)
+        return rawRow.getArrayValue(columnName)
     }
 
     // ----------------- DATETIME --------------------

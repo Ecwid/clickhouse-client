@@ -6,68 +6,328 @@ import java.util.*
 
 object Convert {
 
-    object Int8 : BaseConverter<Byte>() {
-        override fun convertFromString(string: String) = string.toByte()
+    object Int8 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toByte()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toByte()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Byte) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Byte?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Byte>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromArray(array: ByteArray) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Byte?>) = array.map(::fromNullableValue)
     }
 
-    object Int16 : BaseConverter<Short>() {
-        override fun convertFromString(string: String) = string.toShort()
+    object Int16 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toShort()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toShort()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Short) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Short?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Short>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Short?>) = array.map(::fromNullableValue)
     }
 
-    object Int32 : BaseConverter<Int>() {
-        override fun convertFromString(string: String) = string.toInt()
+    object Int32 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toInt()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toInt()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Int) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Int?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Int>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Int?>) = array.map(::fromNullableValue)
     }
 
-    object Int64 : BaseConverter<Long>() {
-        override fun convertFromString(string: String) = string.toLong()
+    object Int64 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toLong()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toLong()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Long) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Long?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Long>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Long?>) = array.map(::fromNullableValue)
     }
 
-    object UInt32 : BaseConverter<Int>() {
-        override fun convertFromString(string: String) = Integer.parseUnsignedInt(string)
+    object UInt32 {
+        @JvmStatic
+        fun toValue(str: String?) = Integer.parseUnsignedInt(requireNotNull(str))
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.let { Integer.parseUnsignedInt(str) }
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Int) = Integer.toUnsignedString(value)
+
+        @JvmStatic
+        fun fromNullableValue(value: Int?) = value?.let { Integer.toUnsignedString(value) }
+
+        @JvmStatic
+        fun fromArray(array: List<Int>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Int?>) = array.map(::fromNullableValue)
     }
 
-    object UInt64 : BaseConverter<Long>() {
-        override fun convertFromString(string: String) = java.lang.Long.parseUnsignedLong(string)
+    object UInt64 {
+        @JvmStatic
+        fun toValue(str: String?) = java.lang.Long.parseUnsignedLong(requireNotNull(str))
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.let { java.lang.Long.parseUnsignedLong(str) }
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Long) = java.lang.Long.toUnsignedString(value)
+
+        @JvmStatic
+        fun fromNullableValue(value: Long?) = value?.let { java.lang.Long.toUnsignedString(value) }
+
+        @JvmStatic
+        fun fromArray(array: List<Long>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Long?>) = array.map(::fromNullableValue)
     }
 
-    object Float32 : BaseConverter<Float>() {
-        override fun convertFromString(string: String) = string.toFloat()
+    object Float32 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toFloat()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toFloat()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Float) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Float?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Float>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Float?>) = array.map(::fromNullableValue)
     }
 
-    object Float64 : BaseConverter<Double>() {
-        override fun convertFromString(string: String) = string.toDouble()
+    object Float64 {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toDouble()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toDouble()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: Double) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: Double?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<Double>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<Double?>) = array.map(::fromNullableValue)
     }
 
-    object Decimal : BaseConverter<BigDecimal>() {
-        override fun convertFromString(string: String) = string.toBigDecimal()
+    object Decimal {
+        @JvmStatic
+        fun toValue(str: String?) = requireNotNull(str).toBigDecimal()
+
+        @JvmStatic
+        fun toNullableValue(str: String?) = str?.toBigDecimal()
+
+        @JvmStatic
+        fun toArray(array: List<String?>) = array.map(::toValue)
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+        @JvmStatic
+        fun fromValue(value: BigDecimal) = value.toString()
+
+        @JvmStatic
+        fun fromNullableValue(value: BigDecimal?) = value?.toString()
+
+        @JvmStatic
+        fun fromArray(array: List<BigDecimal>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<BigDecimal?>) = array.map(::fromNullableValue)
     }
 
-    object Str : StringConverter()
+    object DateTime {
+        @JvmStatic
+        fun toValue(str: String?, timeZone: TimeZone) = convertFromString(requireNotNull(str), timeZone)
 
-    object DateTime : DateConverter() {
+        @JvmStatic
+        fun toNullableValue(str: String?, timeZone: TimeZone) = str?.let { convertFromString(str, timeZone) }
+
+        @JvmStatic
+        fun toArray(array: List<String?>, timeZone: TimeZone) = array.map { toValue(it, timeZone) }
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>, timeZone: TimeZone) = array.map { toNullableValue(it, timeZone) }
+
+        @JvmStatic
+        fun fromValue(value: java.util.Date, timeZone: TimeZone) = convertToString(value, timeZone)
+
+        @JvmStatic
+        fun fromNullableValue(value: java.util.Date?, timeZone: TimeZone) =
+            value?.let { convertToString(value, timeZone) }
+
+        @JvmStatic
+        fun fromArray(array: List<java.util.Date>, timeZone: TimeZone) = array.map { fromValue(it, timeZone) }
+
+        @JvmStatic
+        fun fromNullableArray(array: List<java.util.Date?>, timeZone: TimeZone) =
+            array.map { fromNullableValue(it, timeZone) }
 
         private val DATETIME_FORMAT = ThreadLocal.withInitial {
             SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         }
 
-        override fun convertFromString(string: String, timeZone: TimeZone): java.util.Date {
+        private fun convertFromString(string: String, timeZone: TimeZone): java.util.Date {
             val format = DATETIME_FORMAT.get()
             format.timeZone = timeZone
             return format.parse(string)
         }
+
+        private fun convertToString(value: java.util.Date, timeZone: TimeZone): String {
+            val format = DATETIME_FORMAT.get()
+            format.timeZone = timeZone
+            return format.format(value)
+        }
     }
 
-    object Date : DateConverter() {
+    object Date {
+        @JvmStatic
+        fun toValue(str: String?, timeZone: TimeZone) = convertFromString(requireNotNull(str), timeZone)
+
+        @JvmStatic
+        fun toNullableValue(str: String?, timeZone: TimeZone) = str?.let { convertFromString(str, timeZone) }
+
+        @JvmStatic
+        fun toArray(array: List<String?>, timeZone: TimeZone) = array.map { toValue(it, timeZone) }
+
+        @JvmStatic
+        fun toNullableArray(array: List<String?>, timeZone: TimeZone) = array.map { toNullableValue(it, timeZone) }
+
+        @JvmStatic
+        fun fromValue(value: java.util.Date, timeZone: TimeZone) = convertToString(value, timeZone)
+
+        @JvmStatic
+        fun fromNullableValue(value: java.util.Date?, timeZone: TimeZone) =
+            value?.let { convertToString(value, timeZone) }
+
+        @JvmStatic
+        fun fromArray(array: List<java.util.Date>, timeZone: TimeZone) = array.map { fromValue(it, timeZone) }
+
+        @JvmStatic
+        fun fromNullableArray(array: List<java.util.Date?>, timeZone: TimeZone) =
+            array.map { fromNullableValue(it, timeZone) }
 
         private val DATE_FORMAT = ThreadLocal.withInitial {
             SimpleDateFormat("yyyy-MM-dd")
         }
 
-        override fun convertFromString(string: String, timeZone: TimeZone): java.util.Date {
+        private fun convertFromString(string: String, timeZone: TimeZone): java.util.Date {
             val format = DATE_FORMAT.get()
             format.timeZone = timeZone
             return format.parse(string)
         }
-    }
 
+        private fun convertToString(value: java.util.Date, timeZone: TimeZone): String {
+            val format = DATE_FORMAT.get()
+            format.timeZone = timeZone
+            return format.format(value)
+        }
+    }
 }

@@ -17,10 +17,12 @@ class RawValues {
     }
 
     fun setScalar(index: Int, value: String?) {
+        expandList(index)
         values.set(index, value)
     }
 
     fun setArray(index: Int, array: List<String?>) {
+        expandList(index)
         values.set(index, array)
     }
 
@@ -45,6 +47,15 @@ class RawValues {
                 postfix = "]"
             )
             else -> throw IllegalArgumentException("Can't convert unknown type into String: $value")
+        }
+    }
+
+    private fun expandList(index: Int) {
+        val neededCapacity = index + 1
+
+        values.ensureCapacity(neededCapacity)
+        while (values.size < neededCapacity) {
+            values.add(null)
         }
     }
 
