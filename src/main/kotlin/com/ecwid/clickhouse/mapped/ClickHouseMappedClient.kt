@@ -5,6 +5,7 @@ import com.ecwid.clickhouse.raw.ClickHouseRawClient
 import com.ecwid.clickhouse.transport.HttpTransport
 import com.ecwid.clickhouse.typed.ClickHouseTypedClient
 import com.ecwid.clickhouse.typed.TypedRow
+import com.ecwid.clickhouse.typed.TypedValues
 
 class ClickHouseMappedClient(httpTransport: HttpTransport) {
 
@@ -13,6 +14,10 @@ class ClickHouseMappedClient(httpTransport: HttpTransport) {
     fun <T> select(host: String, sqlQuery: String, mapper: (TypedRow) -> T): ClickHouseResponse<T> {
         val typedResponse = typedClient.select(host, sqlQuery)
         return MappedResponse(typedResponse, mapper)
+    }
+
+    fun <T> insert(host: String, table: String, fields: List<String>, values: List<T>, mapper: (T) -> TypedValues) {
+        typedClient.insert(host, table, fields, values.map(mapper))
     }
 
     fun getRawClient(): ClickHouseRawClient = typedClient.getRawClient()
