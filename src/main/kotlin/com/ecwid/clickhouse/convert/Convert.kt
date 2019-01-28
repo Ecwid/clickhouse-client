@@ -330,4 +330,34 @@ object Convert {
             return format.format(value)
         }
     }
+
+    object Enum {
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> toValue(str: String?, clazz: Class<T>) =
+            java.lang.Enum.valueOf(clazz, requireNotNull(str))
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> toNullableValue(str: String?, clazz: Class<T>) =
+            str?.let { java.lang.Enum.valueOf(clazz, str) }
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> toArray(array: List<String?>, clazz: Class<T>) = array.map { toValue(it, clazz) }
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> toNullableArray(array: List<String?>, clazz: Class<T>) =
+            array.map { toNullableValue(it, clazz) }
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> fromValue(value: T?) = requireNotNull(value).name
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> fromNullableValue(value: T?) = value?.name
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> fromArray(array: List<T>) = array.map { fromValue(it) }
+
+        @JvmStatic
+        fun <T : kotlin.Enum<T>> fromNullableArray(array: List<T?>) = array.map { fromNullableValue(it) }
+
+    }
 }

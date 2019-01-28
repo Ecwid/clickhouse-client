@@ -204,10 +204,11 @@ class TypedValues {
     }
 
     fun setStringArray(columnIndex: Int, array: List<String>) {
-        val a = array.map { value ->
+        // wrap every value to 'value'
+        val wrappedArray = array.map { value ->
             "'$value'"
         }
-        rawValues.setArray(columnIndex, a)
+        rawValues.setArray(columnIndex, wrappedArray)
     }
 
     fun setStringNullable(columnIndex: Int, value: String?) {
@@ -219,14 +220,15 @@ class TypedValues {
     }
 
     fun setStringNullableArray(columnIndex: Int, array: List<String?>) {
-        val a = array.map {
-            if (it == null) {
-                it
+        val wrappedArray = array.map { value ->
+            if (value == null) {
+                null
             } else {
-                "'$it'"
+                "'$value'"
             }
         }
-        rawValues.setArray(columnIndex, a)
+
+        rawValues.setArray(columnIndex, wrappedArray)
     }
 
     // ----------------- DateTime --------------------
@@ -236,7 +238,11 @@ class TypedValues {
     }
 
     fun setDateTimeArray(columnIndex: Int, array: List<Date>, timeZone: TimeZone) {
-        rawValues.setArray(columnIndex, Convert.DateTime.fromArray(array, timeZone))
+        val wrappedArray = Convert.DateTime.fromArray(array, timeZone).map { value ->
+            "'$value'"
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
     }
 
     fun setDateTimeNullable(columnIndex: Int, value: Date?, timeZone: TimeZone) {
@@ -250,7 +256,15 @@ class TypedValues {
     }
 
     fun setDateTimeNullableArray(columnIndex: Int, array: List<Date?>, timeZone: TimeZone) {
-        rawValues.setArray(columnIndex, Convert.DateTime.fromNullableArray(array, timeZone))
+        val wrappedArray = Convert.DateTime.fromNullableArray(array, timeZone).map { value ->
+            if (value == null) {
+                null
+            } else {
+                "'$value'"
+            }
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
     }
 
     // ----------------- Date --------------------
@@ -259,7 +273,11 @@ class TypedValues {
     }
 
     fun setDateArray(columnIndex: Int, array: List<Date>, timeZone: TimeZone) {
-        rawValues.setArray(columnIndex, Convert.Date.fromArray(array, timeZone))
+        val wrappedArray = Convert.Date.fromArray(array, timeZone).map { value ->
+            "'$value'"
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
     }
 
     fun setDateNullable(columnIndex: Int, value: Date?, timeZone: TimeZone) {
@@ -273,6 +291,50 @@ class TypedValues {
     }
 
     fun setDateNullableArray(columnIndex: Int, array: List<Date?>, timeZone: TimeZone) {
-        rawValues.setArray(columnIndex, Convert.Date.fromNullableArray(array, timeZone))
+        val wrappedArray = Convert.Date.fromNullableArray(array, timeZone).map { value ->
+            if (value == null) {
+                null
+            } else {
+                "'$value'"
+            }
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
     }
+
+    // ----------------- Enum --------------------
+    fun <T : Enum<T>> setEnum(columnIndex: Int, value: T) {
+        rawValues.setScalar(columnIndex, "'${Convert.Enum.fromValue(value)}'")
+    }
+
+    fun <T : Enum<T>> setEnumArray(columnIndex: Int, array: List<T>) {
+        val wrappedArray = Convert.Enum.fromArray(array).map { value ->
+            "'$value'"
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
+    }
+
+    fun <T : Enum<T>> setEnumNullable(columnIndex: Int, value: T?) {
+        val scalar = Convert.Enum.fromNullableValue(value)
+
+        if (scalar == null) {
+            rawValues.setScalar(columnIndex, null)
+        } else {
+            rawValues.setScalar(columnIndex, "'$scalar'")
+        }
+    }
+
+    fun <T : Enum<T>> setEnumNullableArray(columnIndex: Int, array: List<T?>) {
+        val wrappedArray = Convert.Enum.fromNullableArray(array).map { value ->
+            if (value == null) {
+                null
+            } else {
+                "'$value'"
+            }
+        }
+
+        rawValues.setArray(columnIndex, wrappedArray)
+    }
+
 }

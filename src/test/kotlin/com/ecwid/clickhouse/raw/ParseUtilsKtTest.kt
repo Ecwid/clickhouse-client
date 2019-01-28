@@ -38,11 +38,11 @@ internal class ParseUtilsKtTest {
         val meta = readMetaObject(JsonReader(json.reader()))
 
         Assertions.assertEquals(5, meta.columns.size)
-        //Assertions.assertEquals(Type.Platform(PlatformType.DATETIME), meta.columns[0])
-        Assertions.assertEquals(Type.Platform(PlatformType.INT_32), meta.columns[1])
-        Assertions.assertEquals(Type.Platform(PlatformType.INT_32_NULLABLE), meta.columns[2])
-        Assertions.assertEquals(Type.Platform(PlatformType.STRING_NULLABLE), meta.columns[3])
-        Assertions.assertEquals(Type.Array(PlatformType.STRING), meta.columns[4])
+        Assertions.assertEquals(Type.Platform(PlatformType.DATETIME, "DateTime"), meta.columns[0])
+        Assertions.assertEquals(Type.Platform(PlatformType.INT_32, "Int32"), meta.columns[1])
+        Assertions.assertEquals(Type.Platform(PlatformType.INT_32_NULLABLE, "Nullable(Int32)"), meta.columns[2])
+        Assertions.assertEquals(Type.Platform(PlatformType.STRING_NULLABLE, "Nullable(String)"), meta.columns[3])
+        Assertions.assertEquals(Type.Array(PlatformType.STRING, "Array(String)"), meta.columns[4])
 
         Assertions.assertEquals(5, meta.names.size)
         Assertions.assertEquals(0, meta.names["date"])

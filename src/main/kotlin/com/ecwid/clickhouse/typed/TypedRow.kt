@@ -667,4 +667,45 @@ data class TypedRow(
         return Convert.Decimal.toNullableArray(array)
     }
 
+    // ----------------- ENUM --------------------
+    fun <T : Enum<T>> getEnum(columnIndex: Int, clazz: Class<T>): T {
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Enum.toValue(scalar, clazz)
+    }
+
+    fun <T : Enum<T>> getEnumArray(columnIndex: Int, clazz: Class<T>): List<T> {
+        val array = rawRow.getArrayValue(columnIndex)
+        return Convert.Enum.toArray(array, clazz)
+    }
+
+    fun <T : Enum<T>> getNullableEnum(columnIndex: Int, clazz: Class<T>): T? {
+        val scalar = rawRow.getScalarValue(columnIndex)
+        return Convert.Enum.toNullableValue(scalar, clazz)
+    }
+
+    fun <T : Enum<T>> getEnumNullableArray(columnIndex: Int, clazz: Class<T>): List<T?> {
+        val array = rawRow.getArrayValue(columnIndex)
+        return Convert.Enum.toNullableArray(array, clazz)
+    }
+
+    fun <T : Enum<T>> getEnum(columnName: String, clazz: Class<T>): T {
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Enum.toValue(scalar, clazz)
+    }
+
+    fun <T : Enum<T>> getEnumArray(columnName: String, clazz: Class<T>): List<T> {
+        val array = rawRow.getArrayValue(columnName)
+        return Convert.Enum.toArray(array, clazz)
+    }
+
+    fun <T : Enum<T>> getNullableEnum(columnName: String, clazz: Class<T>): T? {
+        val scalar = rawRow.getScalarValue(columnName)
+        return Convert.Enum.toNullableValue(scalar, clazz)
+    }
+
+    fun <T : Enum<T>> getEnumNullableArray(columnName: String, clazz: Class<T>): List<T?> {
+        val array = rawRow.getArrayValue(columnName)
+        return Convert.Enum.toNullableArray(array, clazz)
+    }
+
 }

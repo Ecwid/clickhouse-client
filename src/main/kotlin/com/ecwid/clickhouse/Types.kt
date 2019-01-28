@@ -48,11 +48,15 @@ enum class PlatformType(val platformName: String) {
     DECIMAL("Decimal(P,S)"),
     DECIMAL_NULLABLE("Nullable(Decimal(P,S))"),
 
+    // --------------------------------------------------------------
+    ENUM("Enum"),
+    ENUM_NULLABLE("Nullable(Enum)")
+
 }
 
 sealed class Type {
-    data class Platform(val platformType: PlatformType) : Type()
-    data class Array(val platformType: PlatformType) : Type()
+    data class Platform(val type: PlatformType, val rawType: String) : Type()
+    data class Array(val type: PlatformType, val rawType: String) : Type()
 }
 
 internal fun parseType(type: String): Type {
@@ -65,6 +69,14 @@ internal fun parseType(type: String): Type {
 
 private fun findPlatformType(typeName: String): PlatformType {
     val platformType = when {
+        typeName.matches("Enum[0-9]+\\(.*\\)".toRegex()) -> {
+            PlatformType.ENUM
+        }
+
+        typeName.matches("Nullable\\(Enum[0-9]+\\(.*\\)\\)".toRegex()) -> {
+            PlatformType.ENUM_NULLABLE
+        }
+
         typeName.matches("FixedString\\([0-9]+\\)".toRegex()) -> {
             PlatformType.STRING
         }
@@ -78,7 +90,7 @@ private fun findPlatformType(typeName: String): PlatformType {
         }
 
         typeName.matches("Nullable\\(Decimal\\([0-9]+, [0-9]+\\)\\)".toRegex()) -> {
-            PlatformType.DECIMAL
+            PlatformType.DECIMAL_NULLABLE
         }
 
         else -> {
@@ -93,11 +105,11 @@ private fun findPlatformType(typeName: String): PlatformType {
 
 private fun parsePlatformType(type: String): Type {
     val platformType = findPlatformType(type)
-    return Type.Platform(platformType)
+    return Type.Platform(platformType, type)
 }
 
 private fun parseArrayType(type: String): Type {
     val platformTypeName = type.removeSurrounding("Array(", ")")
     val platformType = findPlatformType(platformTypeName)
-    return Type.Array(platformType)
+    return Type.Array(platformType, type)
 }
