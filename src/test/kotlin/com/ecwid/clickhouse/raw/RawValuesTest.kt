@@ -9,14 +9,14 @@ internal class RawValuesTest {
     fun testAddAndSetMixedValues() {
         val rawValues = RawValues()
 
-        rawValues.addScalar("a")
-        rawValues.addScalar("b")
-        rawValues.addScalar(null)
-        rawValues.setScalar(1, "bb")
-        rawValues.addArray(listOf("1", "2", null, "3"))
+        rawValues.addScalar("first", "a")
+        rawValues.addScalar("second", "b")
+        rawValues.addScalar("third", null)
+        rawValues.addScalar("second", "b")
+        rawValues.addArray("", listOf("1", "2", null, "3"))
 
-        val sqlValues = rawValues.joinRawValuesToSqlValues()
-        val expected = "(a,bb,null,[1,2,null,3])"
+        val sqlValues = rawValues.getValues()
+        val expected = "([1,2,null,3],a,b,null)"
 
         assertEquals(expected, sqlValues)
     }

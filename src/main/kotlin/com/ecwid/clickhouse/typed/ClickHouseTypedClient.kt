@@ -20,8 +20,8 @@ class ClickHouseTypedClient(httpTransport: HttpTransport) {
         return select(host, sqlQuery, defaultTimeZone)
     }
 
-    fun insert(host: String, table: String, fields: List<String>, values: List<TypedValues>) {
-        rawClient.insert(host, table, fields, values.map(TypedValues::getRawValues))
+    fun insert(host: String, table: String, values: List<TypedValues>) {
+        rawClient.insert(host, table, values.map(TypedValues::getRawValues))
     }
 
     fun getRawClient(): ClickHouseRawClient = rawClient

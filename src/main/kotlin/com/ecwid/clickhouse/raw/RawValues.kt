@@ -1,38 +1,32 @@
 package com.ecwid.clickhouse.raw
 
+import java.util.*
+
 class RawValues {
 
-    private val values = arrayListOf<Any?>()
+    private val values = TreeMap<String, String>()
 
-    fun addScalar(value: String?) {
-        values.add(value)
+    fun addScalar(field: String, value: String?) {
+        values[field] = transform(value)
     }
 
-    fun addScalars(vararg values: String?) {
-        values.forEach(::addScalar)
+    fun addArray(field: String, array: List<String?>) {
+        values[field] = transform(array)
     }
 
-    fun addArray(array: List<String?>) {
-        values.add(array)
-    }
-
-    fun setScalar(index: Int, value: String?) {
-        expandList(index)
-        values.set(index, value)
-    }
-
-    fun setArray(index: Int, array: List<String?>) {
-        expandList(index)
-        values.set(index, array)
-    }
-
-    // one SQL values block in INSERT clause (A, B, C...)
-    internal fun joinRawValuesToSqlValues(): String {
-        return values.joinToString(
+    fun getFieldsSql(): String {
+        return values.keys.joinToString(
             separator = ",",
             prefix = "(",
-            postfix = ")",
-            transform = ::transform
+            postfix = ")"
+        )
+    }
+
+    fun getValues(): String {
+        return values.values.joinToString(
+            separator = ",",
+            prefix = "(",
+            postfix = ")"
         )
     }
 
@@ -47,15 +41,6 @@ class RawValues {
                 postfix = "]"
             )
             else -> throw IllegalArgumentException("Can't convert unknown type into String: $value")
-        }
-    }
-
-    private fun expandList(index: Int) {
-        val neededCapacity = index + 1
-
-        values.ensureCapacity(neededCapacity)
-        while (values.size < neededCapacity) {
-            values.add(null)
         }
     }
 

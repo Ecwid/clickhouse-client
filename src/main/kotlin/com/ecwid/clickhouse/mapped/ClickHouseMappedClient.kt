@@ -16,8 +16,8 @@ class ClickHouseMappedClient(httpTransport: HttpTransport) {
         return MappedResponse(typedResponse, mapper)
     }
 
-    fun <T> insert(host: String, table: String, fields: List<String>, values: List<T>, mapper: (T) -> TypedValues) {
-        typedClient.insert(host, table, fields, values.map(mapper))
+    fun <T> insert(host: String, table: String, values: List<T>, mapper: (T) -> TypedValues) {
+        typedClient.insert(host, table, values.map(mapper))
     }
 
     fun getRawClient(): ClickHouseRawClient = typedClient.getRawClient()

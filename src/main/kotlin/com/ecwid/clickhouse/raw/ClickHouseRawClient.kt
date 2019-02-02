@@ -20,24 +20,21 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
         return RawResponse(httpResponse)
     }
 
-    fun insert(host: String, table: String, fields: List<String>, values: List<RawValues>) {
+    fun insert(host: String, table: String, values: List<RawValues>) {
         if (values.isEmpty()) {
             // no rows to insert
             return
         }
 
-        val fieldsClause = fields.joinToString(
-            prefix = "(",
-            postfix = ")"
-        )
+        val groupedValues = values.groupBy(RawValues::getFieldsSql, RawValues::getValues)
+        groupedValues.forEach { fieldsClause, sqlValues ->
+            val sql = sqlValues.joinToString(
+                separator = ",",
+                prefix = "insert into $table $fieldsClause values "
+            )
 
-        val sql = values.joinToString(
-            separator = ",",
-            prefix = "insert into $table $fieldsClause values ",
-            transform = RawValues::joinRawValuesToSqlValues
-        )
-
-        executeQuery(host, sql)
+            executeQuery(host, sql)
+        }
     }
 
     fun executeQuery(host: String, sqlQuery: String) {
