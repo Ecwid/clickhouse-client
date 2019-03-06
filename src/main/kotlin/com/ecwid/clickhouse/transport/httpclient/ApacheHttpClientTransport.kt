@@ -18,7 +18,10 @@ private const val DEFAULT_MAX_PER_ROUTE_CONNECTIONS = 50
 private const val DEFAULT_CONNECTION_TIMEOUT = 5000
 private const val DEFAULT_READ_TIMEOUT = 10000
 
-class ApacheHttpClientTransport : HttpTransport {
+class ApacheHttpClientTransport(
+    connectTimeoutMs: Int = DEFAULT_CONNECTION_TIMEOUT,
+    readTimeoutMs: Int = DEFAULT_READ_TIMEOUT
+) : HttpTransport {
 
     private val httpClient: HttpClient
 
@@ -26,12 +29,12 @@ class ApacheHttpClientTransport : HttpTransport {
         val connectionManager = PoolingHttpClientConnectionManager()
         connectionManager.maxTotal = DEFAULT_MAX_CONNECTIONS
         connectionManager.defaultMaxPerRoute =
-                DEFAULT_MAX_PER_ROUTE_CONNECTIONS
+            DEFAULT_MAX_PER_ROUTE_CONNECTIONS
 
         val requestConfig = RequestConfig.custom()
-            .setConnectTimeout(DEFAULT_CONNECTION_TIMEOUT)
-            .setConnectionRequestTimeout(DEFAULT_CONNECTION_TIMEOUT)
-            .setSocketTimeout(DEFAULT_READ_TIMEOUT)
+            .setConnectTimeout(connectTimeoutMs)
+            .setConnectionRequestTimeout(connectTimeoutMs)
+            .setSocketTimeout(readTimeoutMs)
             .build()
 
         val httpClientBuilder = HttpClientBuilder.create()
