@@ -243,6 +243,48 @@ object Convert {
         fun fromNullableArray(array: List<BigDecimal?>) = array.map(::fromNullableValue)
     }
 
+    object Str {
+        @JvmStatic
+        fun fromValue(str: String) = escapeAndQuoteString(str)
+
+        @JvmStatic
+        fun fromNullableValue(str: String?) = str?.let { escapeAndQuoteString(it) }
+
+        @JvmStatic
+        fun fromArray(array: List<String>) = array.map(::fromValue)
+
+        @JvmStatic
+        fun fromNullableArray(array: List<String?>) = array.map(::fromNullableValue)
+
+        private const val QUOTE: Char = '\''
+        private const val BACKSLASH = '\\'
+
+        private fun escapeAndQuoteString(str: String): String {
+            // 2 symbols for quotes and 8 for possible escaping
+            // it's just heuristics, no serious science behind :)
+            val capacity = str.length + 10
+
+            return buildString(capacity) {
+                append(QUOTE)
+
+                for (char in str) {
+                    when (char) {
+                        QUOTE -> {
+                            append(BACKSLASH)
+                            append(QUOTE)
+                        }
+                        BACKSLASH -> {
+                            append(BACKSLASH)
+                            append(BACKSLASH)
+                        }
+                        else -> append(char)
+                    }
+                }
+                append(QUOTE)
+            }
+        }
+    }
+
     object DateTime {
         @JvmStatic
         fun toValue(str: String?, timeZone: TimeZone) = convertFromString(requireNotNull(str), timeZone)

@@ -200,35 +200,19 @@ class TypedValues {
 
     // ----------------- String --------------------
     fun setString(columnName: String, value: String) {
-        rawValues.addScalar(columnName, "'$value'")
+        rawValues.addScalar(columnName, Convert.Str.fromValue(value))
     }
 
     fun setStringArray(columnName: String, array: List<String>) {
-        // wrap every value to 'value'
-        val wrappedArray = array.map { value ->
-            "'$value'"
-        }
-        rawValues.addArray(columnName, wrappedArray)
+        rawValues.addArray(columnName, Convert.Str.fromArray(array))
     }
 
     fun setStringNullable(columnName: String, value: String?) {
-        if (value == null) {
-            rawValues.addScalar(columnName, null)
-        } else {
-            rawValues.addScalar(columnName, "'$value'")
-        }
+        rawValues.addScalar(columnName, Convert.Str.fromNullableValue(value))
     }
 
     fun setStringNullableArray(columnName: String, array: List<String?>) {
-        val wrappedArray = array.map { value ->
-            if (value == null) {
-                null
-            } else {
-                "'$value'"
-            }
-        }
-
-        rawValues.addArray(columnName, wrappedArray)
+        rawValues.addArray(columnName, Convert.Str.fromNullableArray(array))
     }
 
     // ----------------- DateTime --------------------
