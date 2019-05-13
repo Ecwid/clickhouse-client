@@ -1,8 +1,10 @@
 package com.ecwid.clickhouse.transport.httpclient
 
 import com.ecwid.clickhouse.ClickHouseException
+import com.ecwid.clickhouse.transport.ClickhouseCredentials
 import com.ecwid.clickhouse.transport.HttpResponse
 import com.ecwid.clickhouse.transport.HttpTransport
+import org.apache.http.HttpHeaders
 import org.apache.http.client.HttpClient
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.methods.HttpGet
@@ -11,6 +13,9 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager
 import org.apache.http.util.EntityUtils
+import org.apache.http.message.BasicHeader
+import java.nio.charset.StandardCharsets
+import java.util.*
 
 private const val DEFAULT_MAX_CONNECTIONS = 100
 private const val DEFAULT_MAX_PER_ROUTE_CONNECTIONS = 50
@@ -18,9 +23,10 @@ private const val DEFAULT_MAX_PER_ROUTE_CONNECTIONS = 50
 private const val DEFAULT_CONNECTION_TIMEOUT = 5000
 private const val DEFAULT_READ_TIMEOUT = 10000
 
-class ApacheHttpClientTransport(
+class ApacheHttpClientTransport @JvmOverloads constructor(
     connectTimeoutMs: Int = DEFAULT_CONNECTION_TIMEOUT,
-    readTimeoutMs: Int = DEFAULT_READ_TIMEOUT
+    readTimeoutMs: Int = DEFAULT_READ_TIMEOUT,
+    credentials: ClickhouseCredentials? = null
 ) : HttpTransport {
 
     private val httpClient: HttpClient
@@ -41,6 +47,14 @@ class ApacheHttpClientTransport(
             .setConnectionManager(connectionManager)
             .setDefaultRequestConfig(requestConfig)
 
+        if (credentials != null) {
+            val encodedCredentials = Base64.getEncoder().encodeToString(
+                    "${credentials.username}:${credentials.password}".toByteArray(StandardCharsets.UTF_8)
+            )
+            httpClientBuilder.setDefaultHeaders(setOf(
+                    BasicHeader(HttpHeaders.AUTHORIZATION, "Basic $encodedCredentials" )
+            ))
+        }
         this.httpClient = httpClientBuilder.build()
     }
 

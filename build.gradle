@@ -86,7 +86,7 @@ def doUploadArchives = project.hasProperty('sonatypeUsername') && project.hasPro
 if (doUploadArchives) {
     group = "com.ecwid.clickhouse"
     archivesBaseName = "clickhouse-client"
-    version = "0.0.6"
+    version = "0.0.7"
 
     signing {
         sign configurations.archives
