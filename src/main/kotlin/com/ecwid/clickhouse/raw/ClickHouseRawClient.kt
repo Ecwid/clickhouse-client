@@ -27,7 +27,7 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
         }
 
         val groupedValues = values.groupBy(RawValues::getFieldsSql, RawValues::getValues)
-        groupedValues.forEach { fieldsClause, sqlValues ->
+        groupedValues.forEach { (fieldsClause, sqlValues) ->
             val sql = sqlValues.joinToString(
                 separator = ",",
                 prefix = "insert into $table $fieldsClause values "
