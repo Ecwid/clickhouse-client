@@ -7,51 +7,51 @@ import com.ecwid.clickhouse.transport.HttpTransport
 
 class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 
-    fun select(host: String, sqlQuery: String): ClickHouseResponse<RawRow> {
-        val queryWithFormatter = "$sqlQuery format JSONCompact"
+	fun select(host: String, sqlQuery: String): ClickHouseResponse<RawRow> {
+		val queryWithFormatter = "$sqlQuery format JSONCompact"
 
-        val httpResponse = httpTransport.makePostRequest(host, queryWithFormatter)
-        checkResponse(httpResponse)
+		val httpResponse = httpTransport.makePostRequest(host, queryWithFormatter)
+		checkResponse(httpResponse)
 
-        return RawResponse(httpResponse)
-    }
+		return RawResponse(httpResponse)
+	}
 
-    fun insert(host: String, table: String, values: List<RawValues>) {
-        if (values.isEmpty()) {
-            // no rows to insert
-            return
-        }
+	fun insert(host: String, table: String, values: List<RawValues>) {
+		if (values.isEmpty()) {
+			// no rows to insert
+			return
+		}
 
-        val groupedValues = values.groupBy(RawValues::getFieldsSql, RawValues::getValues)
-        groupedValues.forEach { (fieldsClause, sqlValues) ->
-            val sql = sqlValues.joinToString(
-                separator = ",",
-                prefix = "insert into $table $fieldsClause values "
-            )
+		val groupedValues = values.groupBy(RawValues::getFieldsSql, RawValues::getValues)
+		groupedValues.forEach { (fieldsClause, sqlValues) ->
+			val sql = sqlValues.joinToString(
+				separator = ",",
+				prefix = "insert into $table $fieldsClause values "
+			)
 
-            executeQuery(host, sql)
-        }
-    }
+			executeQuery(host, sql)
+		}
+	}
 
-    fun executeQuery(host: String, sqlQuery: String) {
-        val response = httpTransport.makePostRequest(host, sqlQuery)
-        checkResponse(response)
-    }
+	fun executeQuery(host: String, sqlQuery: String) {
+		val response = httpTransport.makePostRequest(host, sqlQuery)
+		checkResponse(response)
+	}
 
-    private fun checkResponse(httpResponse: HttpResponse) {
-        if (httpResponse.statusCode == 200) {
-            return
-        }
+	private fun checkResponse(httpResponse: HttpResponse) {
+		if (httpResponse.statusCode == 200) {
+			return
+		}
 
-        // error response
-        // throw exception and close response
-        httpResponse.use { _ ->
-            val code = httpResponse.statusCode
-            val msg = httpResponse.statusLine
-            val content = httpResponse.content.asString()
+		// error response
+		// throw exception and close response
+		httpResponse.use { _ ->
+			val code = httpResponse.statusCode
+			val msg = httpResponse.statusLine
+			val content = httpResponse.content.asString()
 
-            throw ClickHouseHttpException(code, msg, content)
-        }
-    }
+			throw ClickHouseHttpException(code, msg, content)
+		}
+	}
 
 }
