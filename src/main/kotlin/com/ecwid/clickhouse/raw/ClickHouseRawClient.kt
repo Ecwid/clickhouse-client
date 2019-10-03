@@ -11,7 +11,7 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 		val queryWithFormatter = "$sqlQuery format JSONCompact"
 
 		val httpResponse = httpTransport.makePostRequest(host, queryWithFormatter)
-		checkResponse(httpResponse)
+		checkResponse(httpResponse, sqlQuery)
 
 		return RawResponse(httpResponse)
 	}
@@ -35,10 +35,10 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 
 	fun executeQuery(host: String, sqlQuery: String) {
 		val response = httpTransport.makePostRequest(host, sqlQuery)
-		checkResponse(response)
+		checkResponse(response, sqlQuery)
 	}
 
-	private fun checkResponse(httpResponse: HttpResponse) {
+	private fun checkResponse(httpResponse: HttpResponse, sqlQuery: String) {
 		if (httpResponse.statusCode == 200) {
 			return
 		}
@@ -50,7 +50,7 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 			val msg = httpResponse.statusLine
 			val content = httpResponse.content.asString()
 
-			throw ClickHouseHttpException(code, msg, content)
+			throw ClickHouseHttpException(code, msg, content, sqlQuery)
 		}
 	}
 

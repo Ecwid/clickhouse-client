@@ -12,8 +12,9 @@ open class ClickHouseException : RuntimeException {
 class ClickHouseHttpException(
 	val statusCode: Int,
 	val statusMessage: String,
-	val responseContent: String
+	val responseContent: String,
+	val sqlQuery: String
 ) : ClickHouseException() {
 
-	override val message = "HTTP $statusCode ($statusMessage): $responseContent"
+	override val message = "HTTP $statusCode ($statusMessage): $responseContent (query: ${sqlQuery.take(500)})"
 }
