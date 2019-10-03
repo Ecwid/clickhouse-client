@@ -5,19 +5,6 @@ import org.apache.http.HttpEntity
 import org.apache.http.util.EntityUtils
 import java.io.InputStream
 
-internal data class StringContent(val string: String) : Content {
-
-	override fun asString() = string
-
-	override fun asReader() = string.reader()
-
-	override fun asStream() = string.byteInputStream()
-
-	override fun close() {
-		// nothing to close for string content
-	}
-}
-
 internal data class StreamContent(val stream: InputStream, private val entity: HttpEntity) : Content {
 
 	override fun asString() = asReader().readText()
