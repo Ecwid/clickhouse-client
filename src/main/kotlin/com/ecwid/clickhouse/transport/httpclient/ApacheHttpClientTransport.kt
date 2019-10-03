@@ -49,16 +49,18 @@ class ApacheHttpClientTransport @JvmOverloads constructor(
 
         if (credentials != null) {
             val encodedCredentials = Base64.getEncoder().encodeToString(
-                    "${credentials.username}:${credentials.password}".toByteArray(StandardCharsets.UTF_8)
+                "${credentials.username}:${credentials.password}".toByteArray(StandardCharsets.UTF_8)
             )
-            httpClientBuilder.setDefaultHeaders(setOf(
-                    BasicHeader(HttpHeaders.AUTHORIZATION, "Basic $encodedCredentials" )
-            ))
+            httpClientBuilder.setDefaultHeaders(
+                setOf(
+                    BasicHeader(HttpHeaders.AUTHORIZATION, "Basic $encodedCredentials")
+                )
+            )
         }
         this.httpClient = httpClientBuilder.build()
     }
 
-    override fun makeGetRequest(uri: String): com.ecwid.clickhouse.transport.HttpResponse {
+    override fun makeGetRequest(uri: String): HttpResponse {
         val request = HttpGet(uri)
 
         val response = try {
@@ -74,7 +76,7 @@ class ApacheHttpClientTransport @JvmOverloads constructor(
         return HttpResponse(statusCode, statusMsg, StreamContent(responseContent, response.entity))
     }
 
-    override fun makePostRequest(uri: String, content: String): com.ecwid.clickhouse.transport.HttpResponse {
+    override fun makePostRequest(uri: String, content: String): HttpResponse {
         val request = HttpPost(uri)
         request.entity = StringEntity(content, Charsets.UTF_8)
 
@@ -84,14 +86,10 @@ class ApacheHttpClientTransport @JvmOverloads constructor(
             throw ClickHouseException("Can't execute ClickHouse request", e)
         }
 
-        return try {
-            val statusCode = response.statusLine.statusCode
-            val statusMsg = response.statusLine.reasonPhrase
-            val responseContent = EntityUtils.toString(response.entity, Charsets.UTF_8)
+        val statusCode = response.statusLine.statusCode
+        val statusMsg = response.statusLine.reasonPhrase
+        val responseContent = response.entity.content
 
-            HttpResponse(statusCode, statusMsg, StringContent(responseContent))
-        } finally {
-            EntityUtils.consumeQuietly(response.entity)
-        }
+        return HttpResponse(statusCode, statusMsg, StreamContent(responseContent, response.entity))
     }
 }
