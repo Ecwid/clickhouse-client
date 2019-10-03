@@ -8,3 +8,6 @@ build/
 out/
 
 .DS_Store
+
+# Special exception for my local classes/tests used during development
+src/main/kotlin/com/ecwid/clickhouse/Local*Test.kt
