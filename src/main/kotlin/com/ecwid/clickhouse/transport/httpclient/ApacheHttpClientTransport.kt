@@ -7,7 +7,6 @@ import com.ecwid.clickhouse.transport.HttpTransport
 import org.apache.http.HttpHeaders
 import org.apache.http.client.HttpClient
 import org.apache.http.client.config.RequestConfig
-import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClientBuilder
@@ -57,22 +56,6 @@ class ApacheHttpClientTransport @JvmOverloads constructor(
 			)
 		}
 		this.httpClient = httpClientBuilder.build()
-	}
-
-	override fun makeGetRequest(uri: String): HttpResponse {
-		val request = HttpGet(uri)
-
-		val response = try {
-			httpClient.execute(request)
-		} catch (e: Exception) {
-			throw ClickHouseException("Can't execute ClickHouse request", e)
-		}
-
-		val statusCode = response.statusLine.statusCode
-		val statusMsg = response.statusLine.reasonPhrase
-		val responseContent = response.entity.content
-
-		return HttpResponse(statusCode, statusMsg, StreamContent(responseContent, response.entity))
 	}
 
 	override fun makePostRequest(uri: String, content: String): HttpResponse {
