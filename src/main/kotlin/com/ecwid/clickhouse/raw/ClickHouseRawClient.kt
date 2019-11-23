@@ -35,7 +35,7 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 
 	fun executeQuery(host: String, sqlQuery: String) {
 		val response = httpTransport.makePostRequest(host, sqlQuery)
-		checkResponse(response, sqlQuery)
+		checkResponseAndClose(response, sqlQuery)
 	}
 
 	private fun checkResponse(httpResponse: HttpResponse, sqlQuery: String) {
@@ -46,12 +46,32 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 		// error response
 		// throw exception and close response
 		httpResponse.use { _ ->
-			val code = httpResponse.statusCode
-			val msg = httpResponse.statusLine
-			val content = httpResponse.content.asString()
-
-			throw ClickHouseHttpException(code, msg, content, sqlQuery)
+			val exception = convertResponseToException(httpResponse, sqlQuery)
+			throw exception
 		}
+	}
+
+	private fun checkResponseAndClose(httpResponse: HttpResponse, sqlQuery: String) {
+		httpResponse.use { _ ->
+			if (httpResponse.statusCode == 200) {
+				return
+			}
+
+			val exception = convertResponseToException(httpResponse, sqlQuery)
+			throw exception
+		}
+	}
+
+	private fun convertResponseToException(httpResponse: HttpResponse, sqlQuery: String): ClickHouseHttpException {
+		require(httpResponse.statusCode != 200) {
+			"Can't convert successful response to exception"
+		}
+
+		val code = httpResponse.statusCode
+		val msg = httpResponse.statusLine
+		val content = httpResponse.content.asString()
+
+		return ClickHouseHttpException(code, msg, content, sqlQuery)
 	}
 
 }
