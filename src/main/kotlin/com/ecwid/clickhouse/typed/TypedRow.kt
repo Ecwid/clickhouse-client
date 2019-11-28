@@ -10,6 +10,8 @@ data class TypedRow(
 	private val rawRow: RawRow
 ) {
 
+	fun getMeta() = rawRow.getMeta()
+
 	// ----------------- INT_8 --------------------
 	fun getInt8(columnIndex: Int): Byte {
 		val scalar = rawRow.getScalarValue(columnIndex)

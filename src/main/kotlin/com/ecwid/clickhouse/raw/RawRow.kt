@@ -7,6 +7,8 @@ data class RawRow(
 	private val values: List<Any?>
 ) {
 
+	fun getMeta() = meta
+
 	fun getScalarValue(columnIndex: Int): String? {
 		val value = values[columnIndex]
 		require(value is String?) {
