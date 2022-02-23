@@ -85,6 +85,31 @@ internal fun readRawRow(reader: JsonReader, meta: Meta): RawRow {
 				values.add(array)
 			}
 
+			JsonToken.BEGIN_OBJECT -> {
+				val map = mutableMapOf<String, String?>()
+
+				reader.beginObject()
+				while (reader.hasNext()) {
+					val nextName = reader.peek()
+					require(nextName == JsonToken.NAME) {
+						"Unexpected JSON token $nextName found instead of ${JsonToken.NAME}"
+					}
+					val name = reader.nextName()
+
+					val next = reader.peek()
+					if (next == JsonToken.NULL) {
+						reader.nextNull()
+						map[name] = null
+					} else {
+						val value = reader.nextString()
+						map[name] = value
+					}
+				}
+				reader.endObject()
+
+				values.add(map)
+			}
+
 			else -> {
 				val value = reader.nextString()
 				values.add(value)

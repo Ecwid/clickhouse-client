@@ -57,11 +57,14 @@ enum class PlatformType(val platformName: String) {
 sealed class Type {
 	data class Platform(val type: PlatformType, val rawType: String) : Type()
 	data class Array(val type: PlatformType, val rawType: String) : Type()
+	data class Map(val keyType: PlatformType, val valueType: PlatformType, val rawType: String) : Type()
 }
 
 internal fun parseType(type: String): Type {
 	return if (type.startsWith("Array(")) {
 		parseArrayType(type)
+	} else if (type.startsWith("Map(")) {
+		parseMapType(type)
 	} else {
 		parsePlatformType(type)
 	}
@@ -112,4 +115,15 @@ private fun parseArrayType(type: String): Type {
 	val platformTypeName = type.removeSurrounding("Array(", ")")
 	val platformType = findPlatformType(platformTypeName)
 	return Type.Array(platformType, type)
+}
+
+private fun parseMapType(type: String): Type {
+	val platformTypeName = type.removeSurrounding("Map(", ")")
+	val keyValueTypes = platformTypeName.split(",").map(String::trim)
+	require(keyValueTypes.size == 2) {
+		"Can't parse Map type metadata $type"
+	}
+	val keyPlatformType = findPlatformType(keyValueTypes.first())
+	val valuePlatformType = findPlatformType(keyValueTypes.last())
+	return Type.Map(keyPlatformType, valuePlatformType, type)
 }

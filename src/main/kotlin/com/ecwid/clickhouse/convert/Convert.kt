@@ -410,5 +410,8 @@ object Convert {
 				val value = kv.value?.let { "'$it'" } ?: "NULL"
 				"'${kv.key}'" to value
 			}.toMap()
+
+		@JvmStatic
+		fun toMapValue(map: kotlin.collections.Map<String, String?>) = fromValue(map)
 	}
 }
