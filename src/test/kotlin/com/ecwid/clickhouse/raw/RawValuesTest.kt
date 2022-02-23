@@ -14,9 +14,10 @@ internal class RawValuesTest {
 		rawValues.addScalar("third", null)
 		rawValues.addScalar("second", "b")
 		rawValues.addArray("", listOf("1", "2", null, "3"))
+		rawValues.addMap("map", mapOf("k1" to "v1"))
 
 		val sqlValues = rawValues.getValues()
-		val expected = "([1,2,null,3],a,b,null)"
+		val expected = "([1,2,null,3],a,{k1:v1},b,null)"
 
 		assertEquals(expected, sqlValues)
 	}

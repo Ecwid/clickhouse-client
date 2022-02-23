@@ -321,4 +321,12 @@ class TypedValues {
 		rawValues.addArray(columnName, wrappedArray)
 	}
 
+	// ----------------- Map --------------------
+	fun setMapStringToString(columnName: String, value: Map<String, String>) {
+		rawValues.addMap(columnName, Convert.Map.fromValue(value))
+	}
+
+	fun setMapStringToNullableString(columnName: String, value: Map<String, String?>) {
+		rawValues.addMap(columnName, Convert.Map.fromValue(value))
+	}
 }
