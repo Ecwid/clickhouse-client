@@ -38,4 +38,19 @@ data class RawRow(
 		return getArrayValue(columnIndex)
 	}
 
+	fun getMapValue(columnIndex: Int): Map<String, String?> {
+		val value = values[columnIndex]
+
+		require(value is Map<*, *>) {
+			"Can't convert scalar $value to map"
+		}
+
+		@Suppress("UNCHECKED_CAST")
+		return value as Map<String, String?>
+	}
+
+	fun getMapValue(columnName: String): Map<String, String?> {
+		val columnIndex = meta.getColumnIndex(columnName)
+		return getMapValue(columnIndex)
+	}
 }

@@ -710,4 +710,14 @@ data class TypedRow(
 		return Convert.Enum.toNullableArray(array, clazz)
 	}
 
+	// ----------------- Map --------------------
+	fun getMapStringNullableString(columnName: String): Map<String, String?> {
+		val map = rawRow.getMapValue(columnName)
+		return Convert.Map.toMapValue(map)
+	}
+
+	fun getMapStringString(columnName: String): Map<String, String> {
+		val map = rawRow.getMapValue(columnName)
+		return Convert.Map.toMapValue(map)
+	}
 }

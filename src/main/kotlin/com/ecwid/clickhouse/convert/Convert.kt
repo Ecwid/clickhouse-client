@@ -402,4 +402,16 @@ object Convert {
 		fun <T : kotlin.Enum<T>> fromNullableArray(array: List<T?>) = array.map { fromNullableValue(it) }
 
 	}
+
+	object Map {
+		@JvmStatic
+		fun fromValue(map: kotlin.collections.Map<String, String?>) =
+			map.map { kv ->
+				val value = kv.value?.let { "'$it'" } ?: "NULL"
+				"'${kv.key}'" to value
+			}.toMap()
+
+		@JvmStatic
+		fun toMapValue(map: kotlin.collections.Map<String, String?>) = fromValue(map)
+	}
 }
