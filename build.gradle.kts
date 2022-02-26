@@ -21,8 +21,8 @@ dependencies {
 
 	implementation("com.google.code.gson:gson:2.9.0")
 
-	implementation("org.apache.httpcomponents:httpcore:4.4.10")
-	implementation("org.apache.httpcomponents:httpclient:4.5.6")
+	implementation("org.apache.httpcomponents:httpcore:4.4.15")
+	implementation("org.apache.httpcomponents:httpclient:4.5.13")
 
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
