@@ -153,6 +153,12 @@ signing {
 	sign(publishing.publications["mavenJava"])
 }
 
+nexusStaging {
+	packageGroup = PublicationSettings.STAGING_PACKAGE_GROUP
+	username = settingsProvider.ossrhUsername
+	password = settingsProvider.ossrhPassword
+}
+
 fun Project.sanitizeVersion(): String {
 	return version.toString()
 }
@@ -233,5 +239,7 @@ object PublicationSettings {
 
 	const val SCM_CONNECTION = "scm:git:git@github.com:Ecwid/clickhouse-client.git"
 	const val SCM_URL = "https://github.com/Ecwid/clickhouse-client.git"
+
+	const val STAGING_PACKAGE_GROUP = "com.ecwid"
 
 }
