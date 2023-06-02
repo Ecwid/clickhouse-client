@@ -24,6 +24,8 @@ dependencies {
 	implementation("org.apache.httpcomponents:httpcore:4.4.15")
 	implementation("org.apache.httpcomponents:httpclient:4.5.13")
 
+	compileOnly("io.prometheus:simpleclient:0.16.0")
+
 	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 	testImplementation("org.mockito:mockito-core:2.15.0")
