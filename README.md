@@ -1,7 +1,5 @@
 # clickhouse-client
 
-[![Build Status](https://travis-ci.org/Ecwid/clickhouse-client.svg?branch=master)](https://travis-ci.org/Ecwid/clickhouse-client)
-
 Java/Kotlin client for Yandex ClickHouse (https://clickhouse.yandex)
 
 ## How to use
