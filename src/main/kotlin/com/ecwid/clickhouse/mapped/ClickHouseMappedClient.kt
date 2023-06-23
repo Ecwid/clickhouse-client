@@ -11,8 +11,9 @@ import com.ecwid.clickhouse.typed.TypedValues
 
 class ClickHouseMappedClient(
 	httpTransport: HttpTransport,
-	metrics: Metrics = DefaultMetrics.NONE
+	metrics: Metrics
 ) {
+	constructor(httpTransport: HttpTransport): this(httpTransport, DefaultMetrics.NONE)
 
 	private val typedClient = ClickHouseTypedClient(httpTransport, metrics)
 
