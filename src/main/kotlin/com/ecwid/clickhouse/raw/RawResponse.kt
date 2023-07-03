@@ -6,7 +6,10 @@ import com.ecwid.clickhouse.Statistics
 import com.ecwid.clickhouse.transport.HttpResponse
 import com.google.gson.stream.JsonReader
 
-internal class RawResponse(private val httpResponse: HttpResponse) : ClickHouseResponse<RawRow> {
+internal class RawResponse(
+	private val httpResponse: HttpResponse,
+	private val callTimer: AutoCloseable
+) : ClickHouseResponse<RawRow> {
 
 	private val jsonReader = JsonReader(httpResponse.content.asReader())
 	private var iterationState = IterationState.BEFORE_ITERATION
@@ -46,6 +49,7 @@ internal class RawResponse(private val httpResponse: HttpResponse) : ClickHouseR
 
 	override fun close() {
 		httpResponse.close()
+		callTimer.close()
 	}
 
 	internal fun completeIteration() {

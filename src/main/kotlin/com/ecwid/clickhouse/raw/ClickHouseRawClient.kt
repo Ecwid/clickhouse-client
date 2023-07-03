@@ -2,18 +2,23 @@ package com.ecwid.clickhouse.raw
 
 import com.ecwid.clickhouse.ClickHouseHttpException
 import com.ecwid.clickhouse.ClickHouseResponse
+import com.ecwid.clickhouse.metrics.Metrics
 import com.ecwid.clickhouse.transport.HttpResponse
 import com.ecwid.clickhouse.transport.HttpTransport
 
-class ClickHouseRawClient(private val httpTransport: HttpTransport) {
+class ClickHouseRawClient(
+	private val httpTransport: HttpTransport,
+	private val metrics: Metrics
+) {
 
 	fun select(host: String, sqlQuery: String): ClickHouseResponse<RawRow> {
 		val queryWithFormatter = "$sqlQuery format JSONCompact"
 
+		val requestTimer = metrics.startRequestTimer(host)
 		val httpResponse = httpTransport.makePostRequest(host, queryWithFormatter)
-		checkResponse(httpResponse, sqlQuery)
+		checkResponse(httpResponse, host, sqlQuery)
 
-		return RawResponse(httpResponse)
+		return RawResponse(httpResponse, requestTimer)
 	}
 
 	fun insert(host: String, table: String, values: List<RawValues>) {
@@ -34,11 +39,14 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 	}
 
 	fun executeQuery(host: String, sqlQuery: String) {
+		val requestTimer = metrics.startRequestTimer(host)
 		val response = httpTransport.makePostRequest(host, sqlQuery)
-		checkResponseAndClose(response, sqlQuery)
+		checkResponseAndClose(response, host, sqlQuery, requestTimer)
 	}
 
-	private fun checkResponse(httpResponse: HttpResponse, sqlQuery: String) {
+	private fun checkResponse(httpResponse: HttpResponse, host: String, sqlQuery: String) {
+		metrics.measureRequest(host, httpResponse.statusCode)
+
 		if (httpResponse.statusCode == 200) {
 			return
 		}
@@ -51,8 +59,11 @@ class ClickHouseRawClient(private val httpTransport: HttpTransport) {
 		}
 	}
 
-	private fun checkResponseAndClose(httpResponse: HttpResponse, sqlQuery: String) {
+	private fun checkResponseAndClose(httpResponse: HttpResponse, host: String, sqlQuery: String, requestTimer: AutoCloseable) {
 		httpResponse.use { _ ->
+			requestTimer.close()
+			metrics.measureRequest(host, httpResponse.statusCode)
+
 			if (httpResponse.statusCode == 200) {
 				return
 			}

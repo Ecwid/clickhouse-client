@@ -71,13 +71,63 @@ try (RawResponse response = client.select("http://localhost:8123", "SELECT * FRO
 ## How to add clickhouse-client into your project
 ### Gradle
 ```
-compile "com.ecwid.clickhouse:clickhouse-client:0.5.0"
+compile "com.ecwid.clickhouse:clickhouse-client:0.6.0"
 ```
 ### Maven
 ```
 <dependency>
   <groupId>com.ecwid.clickhouse</groupId>
   <artifactId>clickhouse-client</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
 </dependency>
+```
+
+## How to enable metrics in clickhouse-client
+### Use prometheus metrics
+
+Add prometheus metric dependency to your project
+
+gradle
+```
+compileOnly "io.prometheus:simpleclient:0.16.0"
+```
+
+Inject metrics collector on instantiate client
+```java
+HttpTransport httpTransport = new ApacheHttpClientTransport();
+ClickHouseMappedClient client = new ClickHouseMappedClient(httpTransport, DefaultMetrics.INSTANCE.getPROMETHEUS());
+```
+
+### Use custom metrics collector
+Add implementation of `com.ecwid.clickhouse.metrics.Metrics` interface
+```java
+import com.ecwid.clickhouse.metrics.Metrics;
+import org.jetbrains.annotations.NotNull;
+
+public class DummyMetrics implements Metrics {
+    @Override
+    public void measureRequest(@NotNull String host, int statusCode) {
+        // Measure request to host with received http status code
+    }
+
+    @NotNull
+    @Override
+    public AutoCloseable startRequestTimer(@NotNull String host) {
+        // start measuring request
+        final long startedAt = System.currentTimeMillis();
+        return new AutoCloseable() {
+            @Override
+            public void close() throws Exception {
+                final long completedAt = System.currentTimeMillis();
+                // measure request time to host
+            }
+        };
+    }
+}
+```
+
+And use it on instantiate client:
+```java
+HttpTransport httpTransport = new ApacheHttpClientTransport();
+ClickHouseMappedClient client = new ClickHouseMappedClient(httpTransport, new DummyMetrics());
 ```
