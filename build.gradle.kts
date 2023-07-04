@@ -6,8 +6,8 @@ plugins {
 	java
 	signing
 	kotlin("jvm") version "1.6.10"
-	id("io.codearte.nexus-staging") version "0.22.0"
-	id("nebula.release") version "15.2.0"
+	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	id("nebula.release") version "17.1.0"
 	id("maven-publish")
 }
 
@@ -70,9 +70,15 @@ tasks {
 		}
 	}
 
-	// Publish artifacts to Maven Central before pushing new git tag to repo
-	named("release").get().apply {
-		dependsOn(named("publish").get())
+	afterEvaluate {
+		// Publish artifacts to Maven Central before pushing new git tag to repo
+		named("release").get().apply {
+			dependsOn(named("publishToSonatype").get())
+		}
+
+		named("closeAndReleaseStagingRepository").get().apply {
+			dependsOn(named("final").get())
+		}
 	}
 }
 
@@ -139,15 +145,6 @@ publishing {
 			}
 		}
 	}
-	repositories {
-		maven {
-			credentials {
-				username = settingsProvider.ossrhUsername
-				password = settingsProvider.ossrhPassword
-			}
-			url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-		}
-	}
 }
 
 signing {
@@ -155,10 +152,15 @@ signing {
 	sign(publishing.publications["mavenJava"])
 }
 
-nexusStaging {
-	packageGroup = PublicationSettings.STAGING_PACKAGE_GROUP
-	username = settingsProvider.ossrhUsername
-	password = settingsProvider.ossrhPassword
+nexusPublishing {
+	repositories {
+		sonatype {
+			useStaging.set(true)
+			packageGroup.set(PublicationSettings.STAGING_PACKAGE_GROUP)
+			username.set(settingsProvider.ossrhUsername)
+			password.set(settingsProvider.ossrhPassword)
+		}
+	}
 }
 
 fun Project.sanitizeVersion(): String {
