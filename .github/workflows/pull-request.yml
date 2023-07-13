@@ -1,11 +1,8 @@
-name: On push to master
+name: On pull request
 
-on:
-  push:
-    branches:
-      - master
+on: [ pull_request ]
 
-concurrency: on-push-to-master
+concurrency: on-pull-request
 
 jobs:
   build:
@@ -17,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup JDK 11
+      - name: Setup JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '11'
@@ -25,12 +22,10 @@ jobs:
           cache: 'gradle'
 
       - name: Build
-        run: ./gradlew final closeAndReleaseStagingRepository printFinalReleaseNote
+        run: ./gradlew devSnapshot printDevSnapshotReleaseNote
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
-          GRGIT_USER: ${{ secrets.GRGIT_USER }}
-          GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
