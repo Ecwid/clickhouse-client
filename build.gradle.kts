@@ -37,8 +37,8 @@ dependencies {
 // Kotlin settings
 tasks.withType<KotlinCompile> {
 	kotlinOptions.jvmTarget = "11"
-	kotlinOptions.apiVersion = "1.7"
-	kotlinOptions.languageVersion = "1.7"
+	kotlinOptions.apiVersion = "1.6"
+	kotlinOptions.languageVersion = "1.6"
 }
 
 // Unit tests settings
