@@ -1,13 +1,8 @@
-name: On push to master
+name: On pull request
 
-on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - README.md
+on: [ pull_request ]
 
-concurrency: on-push-to-master
+concurrency: on-pull-request
 
 jobs:
   build:
@@ -27,12 +22,10 @@ jobs:
           cache: 'gradle'
 
       - name: Build
-        run: ./gradlew final closeAndReleaseStagingRepository printFinalReleaseNote
+        run: ./gradlew devSnapshot printDevSnapshotReleaseNote
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
           GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
-          GRGIT_USER: ${{ secrets.GRGIT_USER }}
-          GRGIT_PASS: ${{ secrets.GRGIT_PASS }}
