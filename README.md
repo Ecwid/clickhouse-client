@@ -1,6 +1,6 @@
 # clickhouse-client
 
-Java/Kotlin client for Yandex ClickHouse (https://clickhouse.yandex)
+Java/Kotlin client for ClickHouse (https://clickhouse.com)
 
 ## How to use
 
