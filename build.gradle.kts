@@ -284,7 +284,7 @@ object PublicationSettings {
 	const val ARTIFACT_ID = "clickhouse-client"
 
 	const val POM_NAME = "Ecwid ClickHouse Client"
-	const val POM_DESCRIPTION = "Java client for ClickHouse HTTP API (https://clickhouse.yandex)"
+	const val POM_DESCRIPTION = "Java client for ClickHouse HTTP API (https://clickhouse.com)"
 	const val POM_URL = "https://github.com/Ecwid/clickhouse-client"
 
 	const val DEVELOPER_ID = "vgv"
