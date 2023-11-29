@@ -12,6 +12,13 @@ data class TypedRow(
 
 	fun getMeta() = rawRow.getMeta()
 
+	// ----------------- Bool ---------------------
+
+	fun getBool(columnIndex: Int): Boolean {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Bool.toValue(scalar)
+	}
+
 	// ----------------- INT_8 --------------------
 	fun getInt8(columnIndex: Int): Byte {
 		val scalar = rawRow.getScalarValue(columnIndex)

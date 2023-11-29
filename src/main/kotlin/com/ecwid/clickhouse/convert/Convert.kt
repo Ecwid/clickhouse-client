@@ -6,6 +6,32 @@ import java.util.*
 
 object Convert {
 
+	object Bool {
+		@JvmStatic
+		fun toValue(str: String?) = requireNotNull(str).toBoolean()
+
+		@JvmStatic
+		fun toNullableValue(str: String?) = str?.toBoolean()
+
+		@JvmStatic
+		fun toArray(array: List<String?>) = array.map(::toValue)
+
+		@JvmStatic
+		fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+		@JvmStatic
+		fun fromValue(value: Boolean) = value.toString()
+
+		@JvmStatic
+		fun fromNullableValue(value: Boolean?) = value?.toString()
+
+		@JvmStatic
+		fun fromArray(array: List<Boolean>) = array.map(::fromValue)
+
+		@JvmStatic
+		fun fromNullableArray(array: List<Boolean?>) = array.map(::fromNullableValue)
+	}
+
 	object Int8 {
 		@JvmStatic
 		fun toValue(str: String?) = requireNotNull(str).toByte()
