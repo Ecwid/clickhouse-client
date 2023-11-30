@@ -11,6 +11,11 @@ class TypedValues {
 
 	fun getRawValues() = rawValues
 
+	// ----------------- Boolean --------------------
+	fun setBoolean(columnName: String, value: Boolean) {
+		rawValues.addScalar(columnName, Convert.Bool.fromValue(value))
+	}
+
 	// ----------------- INT_8 --------------------
 	fun setInt8(columnName: String, value: Byte) {
 		rawValues.addScalar(columnName, Convert.Int8.fromValue(value))

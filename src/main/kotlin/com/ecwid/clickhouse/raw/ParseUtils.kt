@@ -110,6 +110,11 @@ internal fun readRawRow(reader: JsonReader, meta: Meta): RawRow {
 				values.add(map)
 			}
 
+			JsonToken.BOOLEAN -> {
+				val value = reader.nextBoolean()
+				values.add(value)
+			}
+
 			else -> {
 				val value = reader.nextString()
 				values.add(value)

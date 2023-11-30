@@ -22,6 +22,19 @@ data class RawRow(
 		return getScalarValue(columnIndex)
 	}
 
+	fun getBoolValue(columnIndex: Int): Boolean {
+		val value = values[columnIndex]
+		require(value is Boolean) {
+			"Can't convert scalar $value to boolean"
+		}
+		return value
+	}
+
+	fun getBoolValue(columnName: String): Boolean {
+		val columnIndex = meta.getColumnIndex(columnName)
+		return getBoolValue(columnIndex)
+	}
+
 	fun getArrayValue(columnIndex: Int): List<String?> {
 		val value = values[columnIndex]
 
