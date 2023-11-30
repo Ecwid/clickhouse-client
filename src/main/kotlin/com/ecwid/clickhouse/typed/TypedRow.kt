@@ -15,8 +15,11 @@ data class TypedRow(
 	// ----------------- Bool ---------------------
 
 	fun getBool(columnIndex: Int): Boolean {
-		val scalar = rawRow.getScalarValue(columnIndex)
-		return Convert.Bool.toValue(scalar)
+		return rawRow.getBoolValue(columnIndex)
+	}
+
+	fun getBool(columnName: String): Boolean {
+		return rawRow.getBoolValue(columnName)
 	}
 
 	// ----------------- INT_8 --------------------

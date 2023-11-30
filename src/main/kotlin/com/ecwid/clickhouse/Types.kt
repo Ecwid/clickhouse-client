@@ -2,6 +2,8 @@ package com.ecwid.clickhouse
 
 enum class PlatformType(val platformName: String) {
 
+	BOOL("Bool"),
+
 	INT_8("Int8"),
 	INT_8_NULLABLE("Nullable(Int8)"),
 

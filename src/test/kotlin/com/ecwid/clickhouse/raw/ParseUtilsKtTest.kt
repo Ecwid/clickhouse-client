@@ -31,25 +31,31 @@ internal class ParseUtilsKtTest {
             {
                 "name": "field4",
                 "type": "Array(String)"
+            },
+			{
+                "name": "field5",
+                "type": "Bool"
             }
         ]
         """.trimIndent()
 
 		val meta = readMetaObject(JsonReader(json.reader()))
 
-		Assertions.assertEquals(5, meta.columns.size)
+		Assertions.assertEquals(6, meta.columns.size)
 		Assertions.assertEquals(Type.Platform(PlatformType.DATETIME, "DateTime"), meta.columns[0])
 		Assertions.assertEquals(Type.Platform(PlatformType.INT_32, "Int32"), meta.columns[1])
 		Assertions.assertEquals(Type.Platform(PlatformType.INT_32_NULLABLE, "Nullable(Int32)"), meta.columns[2])
 		Assertions.assertEquals(Type.Platform(PlatformType.STRING_NULLABLE, "Nullable(String)"), meta.columns[3])
 		Assertions.assertEquals(Type.Array(PlatformType.STRING, "Array(String)"), meta.columns[4])
+		Assertions.assertEquals(Type.Platform(PlatformType.BOOL, "Bool"), meta.columns[5])
 
-		Assertions.assertEquals(5, meta.names.size)
+		Assertions.assertEquals(6, meta.names.size)
 		Assertions.assertEquals(0, meta.names["date"])
 		Assertions.assertEquals(1, meta.names["field1"])
 		Assertions.assertEquals(2, meta.names["field2"])
 		Assertions.assertEquals(3, meta.names["field3"])
 		Assertions.assertEquals(4, meta.names["field4"])
+		Assertions.assertEquals(5, meta.names["field5"])
 	}
 
 	@Test
