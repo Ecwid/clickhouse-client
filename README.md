@@ -89,7 +89,7 @@ Add prometheus metric dependency to your project
 
 gradle
 ```
-compile "io.prometheus:simpleclient:0.16.0"
+compile "io.prometheus:prometheus-metrics-core:1.2.0"
 ```
 
 Inject metrics collector on instantiate client
