@@ -67,6 +67,8 @@ internal fun parseType(type: String): Type {
 		parseArrayType(type)
 	} else if (type.startsWith("Map(")) {
 		parseMapType(type)
+	} else if (type.startsWith("LowCardinality(")) {
+		parseLowCardinalityType(type)
 	} else {
 		parsePlatformType(type)
 	}
@@ -110,6 +112,12 @@ private fun findPlatformType(typeName: String): PlatformType {
 
 private fun parsePlatformType(type: String): Type {
 	val platformType = findPlatformType(type)
+	return Type.Platform(platformType, type)
+}
+
+private fun parseLowCardinalityType(type: String): Type {
+	val platformTypeName = type.removeSurrounding(prefix = "LowCardinality(", suffix = ")")
+	val platformType = findPlatformType(platformTypeName)
 	return Type.Platform(platformType, type)
 }
 
