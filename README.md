@@ -71,14 +71,14 @@ try (RawResponse response = client.select("http://localhost:8123", "SELECT * FRO
 ## How to add clickhouse-client into your project
 ### Gradle
 ```
-compile "com.ecwid.clickhouse:clickhouse-client:0.13.0"
+compile "com.ecwid.clickhouse:clickhouse-client:0.15.0"
 ```
 ### Maven
 ```
 <dependency>
   <groupId>com.ecwid.clickhouse</groupId>
   <artifactId>clickhouse-client</artifactId>
-  <version>0.13.0</version>
+  <version>0.15.0</version>
 </dependency>
 ```
 
