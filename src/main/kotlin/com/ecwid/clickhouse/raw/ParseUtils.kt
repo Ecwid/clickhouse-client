@@ -72,12 +72,19 @@ internal fun readRawRow(reader: JsonReader, meta: Meta): RawRow {
 				reader.beginArray()
 				while (reader.hasNext()) {
 					val next = reader.peek()
-					if (next == JsonToken.NULL) {
-						reader.nextNull()
-						array.add(null)
-					} else {
-						val value = reader.nextString()
-						array.add(value)
+					when (next) {
+						JsonToken.NULL -> {
+							reader.nextNull()
+							array.add(null)
+						}
+						JsonToken.BOOLEAN -> {
+							val value = reader.nextBoolean()
+							array.add(value.toString())
+						}
+						else -> {
+							val value = reader.nextString()
+							array.add(value)
+						}
 					}
 				}
 				reader.endArray()
@@ -97,12 +104,19 @@ internal fun readRawRow(reader: JsonReader, meta: Meta): RawRow {
 					val name = reader.nextName()
 
 					val next = reader.peek()
-					if (next == JsonToken.NULL) {
-						reader.nextNull()
-						map[name] = null
-					} else {
-						val value = reader.nextString()
-						map[name] = value
+					when (next) {
+						JsonToken.NULL -> {
+							reader.nextNull()
+							map[name] = null
+						}
+						JsonToken.BOOLEAN -> {
+							val value = reader.nextBoolean()
+							map[name] = value.toString()
+						}
+						else -> {
+							val value = reader.nextString()
+							map[name] = value
+						}
 					}
 				}
 				reader.endObject()
@@ -112,7 +126,7 @@ internal fun readRawRow(reader: JsonReader, meta: Meta): RawRow {
 
 			JsonToken.BOOLEAN -> {
 				val value = reader.nextBoolean()
-				values.add(value)
+				values.add(value.toString())
 			}
 
 			else -> {

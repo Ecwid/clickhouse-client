@@ -12,9 +12,21 @@ class TypedValues {
 
 	fun getRawValues() = rawValues
 
-	// ----------------- Boolean --------------------
-	fun setBoolean(columnName: String, value: Boolean) {
+	// ----------------- Bool --------------------
+	fun setBool(columnName: String, value: Boolean) {
 		rawValues.addScalar(columnName, Convert.Bool.fromValue(value))
+	}
+
+	fun setBoolArray(columnName: String, array: List<Boolean>) {
+		rawValues.addArray(columnName, Convert.Bool.fromArray(array))
+	}
+
+	fun setBoolNullable(columnName: String, value: Boolean?) {
+		rawValues.addScalar(columnName, Convert.Bool.fromNullableValue(value))
+	}
+
+	fun setBoolNullableArray(columnName: String, array: List<Boolean?>) {
+		rawValues.addArray(columnName, Convert.Bool.fromNullableArray(array))
 	}
 
 	// ----------------- INT_8 --------------------

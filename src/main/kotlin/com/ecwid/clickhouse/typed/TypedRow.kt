@@ -14,13 +14,44 @@ data class TypedRow(
 	fun getMeta() = rawRow.getMeta()
 
 	// ----------------- Bool ---------------------
-
 	fun getBool(columnIndex: Int): Boolean {
-		return rawRow.getBoolValue(columnIndex)
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Bool.toValue(scalar)
+	}
+
+	fun getBoolArray(columnIndex: Int): List<Boolean> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Bool.toArray(array)
+	}
+
+	fun getBoolNullable(columnIndex: Int): Boolean? {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Bool.toNullableValue(scalar)
+	}
+
+	fun getBoolNullableArray(columnIndex: Int): List<Boolean?> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Bool.toNullableArray(array)
 	}
 
 	fun getBool(columnName: String): Boolean {
-		return rawRow.getBoolValue(columnName)
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Bool.toValue(scalar)
+	}
+
+	fun getBoolArray(columnName: String): List<Boolean> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Bool.toArray(array)
+	}
+
+	fun getBoolNullable(columnName: String): Boolean? {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Bool.toNullableValue(scalar)
+	}
+
+	fun getBoolNullableArray(columnName: String): List<Boolean?> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Bool.toNullableArray(array)
 	}
 
 	// ----------------- INT_8 --------------------
