@@ -1,6 +1,7 @@
 package com.ecwid.clickhouse.convert
 
 import java.math.BigDecimal
+import java.math.BigInteger
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -139,6 +140,58 @@ object Convert {
 		fun fromNullableArray(array: List<Long?>) = array.map(::fromNullableValue)
 	}
 
+	object Int128 {
+		@JvmStatic
+		fun toValue(str: String?) = requireNotNull(str).toBigInteger()
+
+		@JvmStatic
+		fun toNullableValue(str: String?) = str?.toBigInteger()
+
+		@JvmStatic
+		fun toArray(array: List<String?>) = array.map(::toValue)
+
+		@JvmStatic
+		fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+		@JvmStatic
+		fun fromValue(value: BigInteger) = value.toString()
+
+		@JvmStatic
+		fun fromNullableValue(value: BigInteger?) = value?.toString()
+
+		@JvmStatic
+		fun fromArray(array: List<BigInteger>) = array.map(::fromValue)
+
+		@JvmStatic
+		fun fromNullableArray(array: List<BigInteger?>) = array.map(::fromNullableValue)
+	}
+
+	object Int256 {
+		@JvmStatic
+		fun toValue(str: String?) = requireNotNull(str).toBigInteger()
+
+		@JvmStatic
+		fun toNullableValue(str: String?) = str?.toBigInteger()
+
+		@JvmStatic
+		fun toArray(array: List<String?>) = array.map(::toValue)
+
+		@JvmStatic
+		fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+		@JvmStatic
+		fun fromValue(value: BigInteger) = value.toString()
+
+		@JvmStatic
+		fun fromNullableValue(value: BigInteger?) = value?.toString()
+
+		@JvmStatic
+		fun fromArray(array: List<BigInteger>) = array.map(::fromValue)
+
+		@JvmStatic
+		fun fromNullableArray(array: List<BigInteger?>) = array.map(::fromNullableValue)
+	}
+
 	object UInt32 {
 		@JvmStatic
 		fun toValue(str: String?) = Integer.parseUnsignedInt(requireNotNull(str))
@@ -189,6 +242,58 @@ object Convert {
 
 		@JvmStatic
 		fun fromNullableArray(array: List<Long?>) = array.map(::fromNullableValue)
+	}
+
+	object UInt128 {
+		@JvmStatic
+		fun toValue(str: String?) = requireNotNull(str).toBigInteger()
+
+		@JvmStatic
+		fun toNullableValue(str: String?) = str?.toBigInteger()
+
+		@JvmStatic
+		fun toArray(array: List<String?>) = array.map(::toValue)
+
+		@JvmStatic
+		fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+		@JvmStatic
+		fun fromValue(value: BigInteger) = value.toString()
+
+		@JvmStatic
+		fun fromNullableValue(value: BigInteger?) = value?.toString()
+
+		@JvmStatic
+		fun fromArray(array: List<BigInteger>) = array.map(::fromValue)
+
+		@JvmStatic
+		fun fromNullableArray(array: List<BigInteger?>) = array.map(::fromNullableValue)
+	}
+
+	object UInt256 {
+		@JvmStatic
+		fun toValue(str: String?) = requireNotNull(str).toBigInteger()
+
+		@JvmStatic
+		fun toNullableValue(str: String?) = str?.toBigInteger()
+
+		@JvmStatic
+		fun toArray(array: List<String?>) = array.map(::toValue)
+
+		@JvmStatic
+		fun toNullableArray(array: List<String?>) = array.map(::toNullableValue)
+
+		@JvmStatic
+		fun fromValue(value: BigInteger) = value.toString()
+
+		@JvmStatic
+		fun fromNullableValue(value: BigInteger?) = value?.toString()
+
+		@JvmStatic
+		fun fromArray(array: List<BigInteger>) = array.map(::fromValue)
+
+		@JvmStatic
+		fun fromNullableArray(array: List<BigInteger?>) = array.map(::fromNullableValue)
 	}
 
 	object Float32 {

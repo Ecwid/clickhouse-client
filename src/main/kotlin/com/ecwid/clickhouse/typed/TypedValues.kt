@@ -3,6 +3,7 @@ package com.ecwid.clickhouse.typed
 import com.ecwid.clickhouse.convert.Convert
 import com.ecwid.clickhouse.raw.RawValues
 import java.math.BigDecimal
+import java.math.BigInteger
 import java.util.*
 
 class TypedValues {
@@ -84,6 +85,40 @@ class TypedValues {
 		rawValues.addArray(columnName, Convert.Int64.fromNullableArray(array))
 	}
 
+	// ----------------- INT_128 --------------------
+	fun setInt128(columnName: String, value: BigInteger) {
+		rawValues.addScalar(columnName, Convert.Int128.fromValue(value))
+	}
+
+	fun setInt128Array(columnName: String, array: List<BigInteger>) {
+		rawValues.addArray(columnName, Convert.Int128.fromArray(array))
+	}
+
+	fun setInt128Nullable(columnName: String, value: BigInteger?) {
+		rawValues.addScalar(columnName, Convert.Int128.fromNullableValue(value))
+	}
+
+	fun setInt128NullableArray(columnName: String, array: List<BigInteger?>) {
+		rawValues.addArray(columnName, Convert.Int128.fromNullableArray(array))
+	}
+
+	// ----------------- INT_256 --------------------
+	fun setInt256(columnName: String, value: BigInteger) {
+		rawValues.addScalar(columnName, Convert.Int256.fromValue(value))
+	}
+
+	fun setInt256Array(columnName: String, array: List<BigInteger>) {
+		rawValues.addArray(columnName, Convert.Int256.fromArray(array))
+	}
+
+	fun setInt256Nullable(columnName: String, value: BigInteger?) {
+		rawValues.addScalar(columnName, Convert.Int256.fromNullableValue(value))
+	}
+
+	fun setInt256NullableArray(columnName: String, array: List<BigInteger?>) {
+		rawValues.addArray(columnName, Convert.Int256.fromNullableArray(array))
+	}
+
 	// ----------------- UINT_8 --------------------
 	fun setUInt8(columnName: String, value: Int) {
 		rawValues.addScalar(columnName, Convert.Int32.fromValue(value))
@@ -150,6 +185,40 @@ class TypedValues {
 
 	fun setUInt64NullableArray(columnName: String, array: List<Long?>) {
 		rawValues.addArray(columnName, Convert.UInt64.fromNullableArray(array))
+	}
+
+	// ----------------- UINT_128 --------------------
+	fun setUInt128(columnName: String, value: BigInteger) {
+		rawValues.addScalar(columnName, Convert.UInt128.fromValue(value))
+	}
+
+	fun setUInt128Array(columnName: String, array: List<BigInteger>) {
+		rawValues.addArray(columnName, Convert.UInt128.fromArray(array))
+	}
+
+	fun setUInt128Nullable(columnName: String, value: BigInteger?) {
+		rawValues.addScalar(columnName, Convert.UInt128.fromNullableValue(value))
+	}
+
+	fun setUInt128NullableArray(columnName: String, array: List<BigInteger?>) {
+		rawValues.addArray(columnName, Convert.UInt128.fromNullableArray(array))
+	}
+
+	// ----------------- UINT_256 --------------------
+	fun setUInt256(columnName: String, value: BigInteger) {
+		rawValues.addScalar(columnName, Convert.UInt256.fromValue(value))
+	}
+
+	fun setUInt256Array(columnName: String, array: List<BigInteger>) {
+		rawValues.addArray(columnName, Convert.UInt256.fromArray(array))
+	}
+
+	fun setUInt256Nullable(columnName: String, value: BigInteger?) {
+		rawValues.addScalar(columnName, Convert.UInt256.fromNullableValue(value))
+	}
+
+	fun setUInt256NullableArray(columnName: String, array: List<BigInteger?>) {
+		rawValues.addArray(columnName, Convert.UInt256.fromNullableArray(array))
 	}
 
 	// ----------------- Float32 --------------------

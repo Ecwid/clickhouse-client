@@ -3,6 +3,7 @@ package com.ecwid.clickhouse.typed
 import com.ecwid.clickhouse.convert.Convert
 import com.ecwid.clickhouse.raw.RawRow
 import java.math.BigDecimal
+import java.math.BigInteger
 import java.util.*
 
 data class TypedRow(
@@ -189,6 +190,90 @@ data class TypedRow(
 		return Convert.Int64.toNullableArray(array)
 	}
 
+	// ----------------- INT_128 --------------------
+
+	fun getInt128(columnIndex: Int): BigInteger {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Int128.toValue(scalar)
+	}
+
+	fun getInt128Array(columnIndex: Int): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Int128.toArray(array)
+	}
+
+	fun getInt128Nullable(columnIndex: Int): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Int128.toNullableValue(scalar)
+	}
+
+	fun getInt128NullableArray(columnIndex: Int): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Int128.toNullableArray(array)
+	}
+
+	fun getInt128(columnName: String): BigInteger {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Int128.toValue(scalar)
+	}
+
+	fun getInt128Array(columnName: String): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Int128.toArray(array)
+	}
+
+	fun getInt128Nullable(columnName: String): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Int128.toNullableValue(scalar)
+	}
+
+	fun getInt128NullableArray(columnName: String): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Int128.toNullableArray(array)
+	}
+
+	// ----------------- INT_256 --------------------
+
+	fun getInt256(columnIndex: Int): BigInteger {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Int256.toValue(scalar)
+	}
+
+	fun getInt256Array(columnIndex: Int): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Int256.toArray(array)
+	}
+
+	fun getInt256Nullable(columnIndex: Int): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.Int256.toNullableValue(scalar)
+	}
+
+	fun getInt256NullableArray(columnIndex: Int): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.Int256.toNullableArray(array)
+	}
+
+	fun getInt256(columnName: String): BigInteger {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Int256.toValue(scalar)
+	}
+
+	fun getInt256Array(columnName: String): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Int256.toArray(array)
+	}
+
+	fun getInt256Nullable(columnName: String): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.Int256.toNullableValue(scalar)
+	}
+
+	fun getInt256NullableArray(columnName: String): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.Int256.toNullableArray(array)
+	}
+
 	// ----------------- UINT_8 --------------------
 
 	fun getUInt8(columnIndex: Int): Int {
@@ -354,6 +439,90 @@ data class TypedRow(
 	fun getUInt64NullableArray(columnName: String): List<Long?> {
 		val array = rawRow.getArrayValue(columnName)
 		return Convert.UInt64.toNullableArray(array)
+	}
+
+	// ----------------- UINT_128 --------------------
+
+	fun getUInt128(columnIndex: Int): BigInteger {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.UInt128.toValue(scalar)
+	}
+
+	fun getUInt128Array(columnIndex: Int): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.UInt128.toArray(array)
+	}
+
+	fun getUInt128Nullable(columnIndex: Int): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.UInt128.toNullableValue(scalar)
+	}
+
+	fun getUInt128NullableArray(columnIndex: Int): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.UInt128.toNullableArray(array)
+	}
+
+	fun getUInt128(columnName: String): BigInteger {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.UInt128.toValue(scalar)
+	}
+
+	fun getUInt128Array(columnName: String): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.UInt128.toArray(array)
+	}
+
+	fun getUInt128Nullable(columnName: String): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.UInt128.toNullableValue(scalar)
+	}
+
+	fun getUInt128NullableArray(columnName: String): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.UInt128.toNullableArray(array)
+	}
+
+	// ----------------- UINT_256 --------------------
+
+	fun getUInt256(columnIndex: Int): BigInteger {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.UInt256.toValue(scalar)
+	}
+
+	fun getUInt256Array(columnIndex: Int): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.UInt256.toArray(array)
+	}
+
+	fun getUInt256Nullable(columnIndex: Int): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnIndex)
+		return Convert.UInt256.toNullableValue(scalar)
+	}
+
+	fun getUInt256NullableArray(columnIndex: Int): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnIndex)
+		return Convert.UInt256.toNullableArray(array)
+	}
+
+	fun getUInt256(columnName: String): BigInteger {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.UInt256.toValue(scalar)
+	}
+
+	fun getUInt256rray(columnName: String): List<BigInteger> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.UInt256.toArray(array)
+	}
+
+	fun getUInt256Nullable(columnName: String): BigInteger? {
+		val scalar = rawRow.getScalarValue(columnName)
+		return Convert.UInt256.toNullableValue(scalar)
+	}
+
+	fun getUInt256NullableArray(columnName: String): List<BigInteger?> {
+		val array = rawRow.getArrayValue(columnName)
+		return Convert.UInt256.toNullableArray(array)
 	}
 
 	// ----------------- FLOAT_32 --------------------

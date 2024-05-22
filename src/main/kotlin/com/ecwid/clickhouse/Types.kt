@@ -16,6 +16,12 @@ enum class PlatformType(val platformName: String) {
 	INT_64("Int64"),
 	INT_64_NULLABLE("Nullable(Int64)"),
 
+	INT_128("Int128"),
+	INT_128_NULLABLE("Nullable(Int128)"),
+
+	INT_256("Int256"),
+	INT_256_NULLABLE("Nullable(Int256)"),
+
 	UINT_8("UInt8"),
 	UINT_8_NULLABLE("Nullable(UInt8)"),
 
@@ -27,6 +33,12 @@ enum class PlatformType(val platformName: String) {
 
 	UINT_64("UInt64"),
 	UINT_64_NULLABLE("Nullable(UInt64)"),
+
+	UINT_128("UInt128"),
+	UINT_128_NULLABLE("Nullable(UInt128)"),
+
+	UINT_256("UInt256"),
+	UINT_256_NULLABLE("Nullable(UInt256)"),
 
 	// --------------------------------------------------------------
 	FLOAT_32("Float32"),
