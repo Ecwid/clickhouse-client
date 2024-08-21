@@ -386,34 +386,6 @@ object Convert {
 
 		@JvmStatic
 		fun fromNullableArray(array: List<String?>) = array.map(::fromNullableValue)
-
-		private const val QUOTE: Char = '\''
-		private const val BACKSLASH = '\\'
-
-		private fun escapeAndQuoteString(str: String): String {
-			// 2 symbols for quotes and 8 for possible escaping
-			// it's just heuristics, no serious science behind :)
-			val capacity = str.length + 10
-
-			return buildString(capacity) {
-				append(QUOTE)
-
-				for (char in str) {
-					when (char) {
-						QUOTE -> {
-							append(BACKSLASH)
-							append(QUOTE)
-						}
-						BACKSLASH -> {
-							append(BACKSLASH)
-							append(BACKSLASH)
-						}
-						else -> append(char)
-					}
-				}
-				append(QUOTE)
-			}
-		}
 	}
 
 	object DateTime {
@@ -538,11 +510,41 @@ object Convert {
 		@JvmStatic
 		fun fromValue(map: kotlin.collections.Map<String, String?>) =
 			map.map { kv ->
-				val value = kv.value?.let { "'$it'" } ?: "NULL"
-				"'${kv.key}'" to value
+				val value = kv.value?.let { escapeAndQuoteString(it) } ?: "NULL"
+				escapeAndQuoteString(kv.key) to value
 			}.toMap()
 
 		@JvmStatic
 		fun toMapValue(map: kotlin.collections.Map<String, String?>) = fromValue(map)
+	}
+
+	private const val QUOTE: Char = '\''
+	private const val BACKSLASH = '\\'
+
+	private fun escapeAndQuoteString(str: String): String {
+		// 2 symbols for quotes and 8 for possible escaping
+		// it's just heuristics, no serious science behind :)
+		val capacity = str.length + 10
+
+		return buildString(capacity) {
+			append(QUOTE)
+
+			for (char in str) {
+				when (char) {
+					QUOTE -> {
+						append(BACKSLASH)
+						append(QUOTE)
+					}
+
+					BACKSLASH -> {
+						append(BACKSLASH)
+						append(BACKSLASH)
+					}
+
+					else -> append(char)
+				}
+			}
+			append(QUOTE)
+		}
 	}
 }
