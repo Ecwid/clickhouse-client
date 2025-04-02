@@ -4,11 +4,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	java
-	kotlin("jvm") version "1.9.23"
+	alias(libs.plugins.kotlin.jvm)
 	signing
 	`maven-publish`
-	id("com.netflix.nebula.release") version "17.2.2"
-	id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+	alias(libs.plugins.nebula.release)
+	alias(libs.plugins.nexus.publish.plugin)
 }
 
 repositories {
@@ -19,16 +19,16 @@ dependencies {
 	implementation(kotlin("stdlib-jdk8"))
 	implementation(kotlin("reflect"))
 
-	implementation("com.google.code.gson:gson:2.10.1")
+	implementation(libs.gson)
 
-	implementation("org.apache.httpcomponents:httpcore:4.4.16")
-	implementation("org.apache.httpcomponents:httpclient:4.5.14")
+	implementation(libs.httpcomponents.httpcore)
+	implementation(libs.httpcomponents.httpclient)
 
-	compileOnly("io.prometheus:prometheus-metrics-core:1.2.0")
+	compileOnly(libs.prometheus.metrics.core)
 
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
-	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-	testImplementation("org.slf4j:slf4j-simple:1.7.36")
+	testRuntimeOnly(libs.junit.jupiter.engine)
+	testImplementation(libs.junit.jupiter.api)
+	testImplementation(libs.slf4j)
 }
 
 
