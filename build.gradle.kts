@@ -39,6 +39,13 @@ tasks.withType<KotlinCompile> {
 	kotlinOptions.languageVersion = "1.6"
 }
 
+java {
+	sourceCompatibility = JavaVersion.VERSION_11
+	targetCompatibility = JavaVersion.VERSION_11
+	withJavadocJar()
+	withSourcesJar()
+}
+
 // Unit tests settings
 tasks.withType<Test> {
 	enableAssertions = true
@@ -49,12 +56,6 @@ tasks.withType<Test> {
 		showStandardStreams = false
 	}
 }
-
-java {
-	withSourcesJar()
-	withJavadocJar()
-}
-
 
 val settingsProvider = SettingsProvider()
 
