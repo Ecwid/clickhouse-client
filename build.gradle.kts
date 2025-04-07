@@ -73,7 +73,7 @@ tasks {
 			dependsOn(named("publishToSonatype").get())
 		}
 
-		named("closeAndReleaseStagingRepository").get().apply {
+		named("closeAndReleaseStagingRepositories").get().apply {
 			dependsOn(named("final").get())
 		}
 	}
