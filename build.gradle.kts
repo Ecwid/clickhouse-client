@@ -26,6 +26,7 @@ dependencies {
 
 	compileOnly(libs.prometheus.metrics.core)
 
+	testRuntimeOnly(libs.junit.platform.launcher)
 	testRuntimeOnly(libs.junit.jupiter.engine)
 	testImplementation(libs.junit.jupiter.api)
 	testImplementation(libs.slf4j)
