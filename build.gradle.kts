@@ -2,7 +2,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	java
@@ -28,6 +27,7 @@ dependencies {
 
 	compileOnly(libs.prometheus.metrics.core)
 
+	testRuntimeOnly(libs.junit.platform.launcher)
 	testRuntimeOnly(libs.junit.jupiter.engine)
 	testImplementation(libs.junit.jupiter.api)
 	testImplementation(libs.slf4j)
