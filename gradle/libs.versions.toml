@@ -1,6 +1,6 @@
 [versions]
 
-gson = "2.12.1"
+gson = "2.13.0"
 httpcomponents-httpclient = "4.5.14"
 httpcomponents-httpcore = "4.4.16"
 junit = "5.12.1"
