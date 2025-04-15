@@ -3,7 +3,7 @@
 gson = "2.13.0"
 httpcomponents-httpclient = "4.5.14"
 httpcomponents-httpcore = "4.4.16"
-junit = "5.12.1"
+junit = "5.12.2"
 junit-platform = "1.12.2"
 kotlin = "2.1.20"
 nebula = "17.2.2"
