@@ -17,19 +17,23 @@ repositories {
 }
 
 dependencies {
-	implementation(kotlin("stdlib-jdk8"))
-	implementation(kotlin("reflect"))
+	// Kotlin
+	implementation(libs.kotlin.stdlib)
+	implementation(libs.kotlin.reflect)
 
+	// Gson
 	implementation(libs.gson)
 
+	// HttpClient
 	implementation(libs.httpcomponents.httpcore)
 	implementation(libs.httpcomponents.httpclient)
 
+	// Prometheus
 	compileOnly(libs.prometheus.metrics.core)
 
-	testRuntimeOnly(libs.junit.platform.launcher)
-	testRuntimeOnly(libs.junit.jupiter.engine)
-	testImplementation(libs.junit.jupiter.api)
+	// Test
+	testImplementation(libs.junit.jupiter)
+	testImplementation(libs.kotlin.test)
 	testImplementation(libs.slf4j)
 }
 
