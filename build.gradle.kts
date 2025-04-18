@@ -192,9 +192,12 @@ fun Project.sanitizeVersion(): String {
 	return if (project.isSnapshotVersion()) {
 		val githubHeadRef = settingsProvider.githubHeadRef
 		if (githubHeadRef != null) {
-			// github pull request
-			version
-				.replace(Regex("-dev\\.\\d+\\+[a-f0-9]+$"), "-dev+$githubHeadRef-SNAPSHOT")
+			// GitHub pull request
+			// githubHeadRef contains branch name, but branch name can have '/',
+			// for example 'dependabot/gradle/com.netflix.nebula.release-20.2.0'
+			// Maven Central doesn't allow '/' in artifact version, so we replace it with '-'
+			val branchName = githubHeadRef.replace('/', '-')
+			version.replace(Regex("-dev\\.\\d+\\+[a-f0-9]+$"), "-dev+$branchName-SNAPSHOT")
 		} else {
 			// local branch
 			version
@@ -303,7 +306,5 @@ object PublicationSettings {
 
 	const val SCM_CONNECTION = "scm:git:git@github.com:Ecwid/clickhouse-client.git"
 	const val SCM_URL = "https://github.com/Ecwid/clickhouse-client.git"
-
-	const val STAGING_PACKAGE_GROUP = "com.ecwid"
 
 }
