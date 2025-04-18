@@ -32,7 +32,7 @@ jobs:
                     cache: 'gradle'
 
             -   name: Build
-                run: ./gradlew final closeAndReleaseStagingRepository printFinalReleaseNote
+                run: ./gradlew final closeAndReleaseStagingRepositories printFinalReleaseNote
                 env:
                     GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
                     GPG_SIGNING_PASSWORD: ${{ secrets.GPG_SIGNING_PASSWORD }}
