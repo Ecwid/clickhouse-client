@@ -42,8 +42,8 @@ dependencies {
 kotlin {
 	compilerOptions {
 		jvmTarget = JvmTarget.JVM_11
-		apiVersion = KotlinVersion.KOTLIN_1_6
-		languageVersion = KotlinVersion.KOTLIN_1_6
+		apiVersion = KotlinVersion.KOTLIN_1_8
+		languageVersion = KotlinVersion.KOTLIN_1_8
 	}
 }
 
