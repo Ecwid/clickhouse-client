@@ -176,8 +176,8 @@ nexusPublishing {
 			packageGroup.set(PublicationSettings.GROUP_ID)
 			username.set(settingsProvider.sonatypeUsername)
 			password.set(settingsProvider.sonatypePassword)
-//			nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-//			snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+			nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+			snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
 		}
 	}
 }
@@ -243,10 +243,7 @@ fun printDevSnapshotReleaseNote(groupId: String, artifactId: String, sanitizedVe
 	println("	version: $sanitizedVersion")
 	println()
 	println("Discover on Maven Central:")
-	println("	https://oss.sonatype.org/content/repositories/snapshots/${groupId.replace('.', '/')}/$artifactId/")
-	println()
-	println("Edit or delete artifacts on OSS Nexus Repository Manager:")
-	println("	https://oss.sonatype.org/#nexus-search;gav~$groupId~~~~")
+	println("	https://central.sonatype.com/repository/maven-snapshots/${groupId.replace('.', '/')}/$artifactId/$sanitizedVersion/maven-metadata.xml")
 	println()
 	println("========================================================")
 	println()
