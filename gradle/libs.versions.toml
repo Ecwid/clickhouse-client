@@ -7,7 +7,7 @@ nexus-publish-plugin = { id = "io.github.gradle-nexus.publish-plugin", version.r
 [versions]
 
 kotlin = "2.2.0"
-nebula = "20.2.0"
+nebula = "21.0.0"
 nexus-publish-plugin = "2.0.0"
 
 gson = "2.13.1"
