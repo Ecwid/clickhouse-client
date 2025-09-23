@@ -10,7 +10,7 @@ kotlin = "2.2.10"
 nebula = "20.2.0"
 nexus-publish-plugin = "2.0.0"
 
-gson = "2.13.1"
+gson = "2.13.2"
 httpcomponents-httpclient = "4.5.14"
 httpcomponents-httpcore = "4.4.16"
 junit = "5.13.4"
