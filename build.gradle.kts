@@ -41,15 +41,15 @@ dependencies {
 // Kotlin settings
 kotlin {
 	compilerOptions {
-		jvmTarget = JvmTarget.JVM_11
+		jvmTarget = JvmTarget.JVM_17
 		apiVersion = KotlinVersion.KOTLIN_1_8
 		languageVersion = KotlinVersion.KOTLIN_1_8
 	}
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_11
-	targetCompatibility = JavaVersion.VERSION_11
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 	withJavadocJar()
 	withSourcesJar()
 }
