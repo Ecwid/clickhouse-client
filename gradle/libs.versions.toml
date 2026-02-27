@@ -6,14 +6,14 @@ nexus-publish-plugin = { id = "io.github.gradle-nexus.publish-plugin", version.r
 
 [versions]
 
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 nebula = "20.2.0"
 nexus-publish-plugin = "2.0.0"
 
 gson = "2.13.2"
 httpcomponents-httpclient = "4.5.14"
 httpcomponents-httpcore = "4.4.16"
-junit = "6.0.1"
+junit = "6.0.2"
 prometheus = "1.4.3"
 slf4j = "2.0.17"
 
