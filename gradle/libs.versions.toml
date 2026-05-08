@@ -14,7 +14,7 @@ gson = "2.14.0"
 httpcomponents-httpclient = "4.5.14"
 httpcomponents-httpcore = "4.4.16"
 junit = "6.0.3"
-prometheus = "1.4.3"
+prometheus = "1.6.1"
 slf4j = "2.0.17"
 
 [libraries]
