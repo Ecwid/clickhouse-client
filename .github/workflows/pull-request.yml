@@ -21,7 +21,8 @@ jobs:
           distribution: 'corretto'
           cache: 'gradle'
 
-      - name: Build
+      - name: Build (by human)
+        if: github.actor != 'dependabot[bot]'
         run: ./gradlew devSnapshot printDevSnapshotReleaseNote
         env:
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
@@ -29,3 +30,7 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           GITHUB_HEAD_REF: ${{ github.head_ref }}
+
+      - name: Build (by dependabot)
+        if: github.actor == 'dependabot[bot]'
+        run: ./gradlew test
