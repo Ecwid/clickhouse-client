@@ -34,7 +34,9 @@ dependencies {
 	// Test
 	testImplementation(libs.junit.jupiter)
 	testImplementation(libs.kotlin.test)
-	testImplementation(libs.slf4j)
+	testImplementation(libs.slf4j.api)
+	testImplementation(libs.testcontainers.clickhouse)
+	testRuntimeOnly(libs.slf4j.simple)
 }
 
 
@@ -58,6 +60,12 @@ java {
 tasks.withType<Test> {
 	enableAssertions = true
 	useJUnitPlatform()
+
+	// Every ClickHouse integration test runs in its own container, so tests are fully
+	// isolated and can run in parallel to amortize container startup time
+	systemProperties["junit.jupiter.execution.parallel.enabled"] = true
+	systemProperties["junit.jupiter.execution.parallel.mode.default"] = "concurrent"
+
 	testLogging {
 		exceptionFormat = TestExceptionFormat.FULL
 		events = setOf(TestLogEvent.PASSED, TestLogEvent.STARTED, TestLogEvent.FAILED, TestLogEvent.SKIPPED)

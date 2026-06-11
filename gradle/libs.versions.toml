@@ -16,6 +16,7 @@ httpcomponents-httpcore = "4.4.16"
 junit = "6.1.0"
 prometheus = "1.6.1"
 slf4j = "2.0.18"
+testcontainers = "2.0.5"
 
 [libraries]
 
@@ -36,4 +37,6 @@ prometheus-metrics-core = { group = "io.prometheus", name = "prometheus-metrics-
 # Testing
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
-slf4j = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
+slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
+slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
+testcontainers-clickhouse = { module = "org.testcontainers:testcontainers-clickhouse", version.ref = "testcontainers" }
