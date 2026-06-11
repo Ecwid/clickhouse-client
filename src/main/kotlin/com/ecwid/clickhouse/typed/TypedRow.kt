@@ -541,7 +541,7 @@ data class TypedRow(
 		return Convert.UInt256.toValue(scalar)
 	}
 
-	fun getUInt256rray(columnName: String): List<BigInteger> {
+	fun getUInt256Array(columnName: String): List<BigInteger> {
 		val array = rawRow.getArrayValue(columnName)
 		return Convert.UInt256.toArray(array)
 	}
