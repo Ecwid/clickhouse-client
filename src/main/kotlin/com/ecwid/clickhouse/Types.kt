@@ -81,41 +81,47 @@ internal fun parseType(type: String): Type {
 		parseArrayType(type)
 	} else if (type.startsWith("Map(")) {
 		parseMapType(type)
-	} else if (type.startsWith("LowCardinality(")) {
-		parseLowCardinalityType(type)
 	} else {
 		parsePlatformType(type)
 	}
 }
 
 private fun findPlatformType(typeName: String): PlatformType {
+	// LowCardinality is a storage optimization and is transparent for the client:
+	// unwrap it wherever it appears — top level, inside Array(...) or as a Map value type
+	val name = if (typeName.startsWith("LowCardinality(")) {
+		typeName.removeSurrounding(prefix = "LowCardinality(", suffix = ")")
+	} else {
+		typeName
+	}
+
 	val platformType = when {
-		typeName.matches("Enum[0-9]+\\(.*\\)".toRegex()) -> {
+		name.matches("Enum[0-9]+\\(.*\\)".toRegex()) -> {
 			PlatformType.ENUM
 		}
 
-		typeName.matches("Nullable\\(Enum[0-9]+\\(.*\\)\\)".toRegex()) -> {
+		name.matches("Nullable\\(Enum[0-9]+\\(.*\\)\\)".toRegex()) -> {
 			PlatformType.ENUM_NULLABLE
 		}
 
-		typeName.matches("FixedString\\([0-9]+\\)".toRegex()) -> {
+		name.matches("FixedString\\([0-9]+\\)".toRegex()) -> {
 			PlatformType.STRING
 		}
 
-		typeName.matches("Nullable\\(FixedString\\([0-9]+\\)\\)".toRegex()) -> {
+		name.matches("Nullable\\(FixedString\\([0-9]+\\)\\)".toRegex()) -> {
 			PlatformType.STRING_NULLABLE
 		}
 
-		typeName.matches("Decimal\\([0-9]+, [0-9]+\\)".toRegex()) -> {
+		name.matches("Decimal\\([0-9]+, [0-9]+\\)".toRegex()) -> {
 			PlatformType.DECIMAL
 		}
 
-		typeName.matches("Nullable\\(Decimal\\([0-9]+, [0-9]+\\)\\)".toRegex()) -> {
+		name.matches("Nullable\\(Decimal\\([0-9]+, [0-9]+\\)\\)".toRegex()) -> {
 			PlatformType.DECIMAL_NULLABLE
 		}
 
 		else -> {
-			PlatformType.values().find { it.platformName == typeName }
+			PlatformType.values().find { it.platformName == name }
 		}
 	}
 
@@ -126,12 +132,6 @@ private fun findPlatformType(typeName: String): PlatformType {
 
 private fun parsePlatformType(type: String): Type {
 	val platformType = findPlatformType(type)
-	return Type.Platform(platformType, type)
-}
-
-private fun parseLowCardinalityType(type: String): Type {
-	val platformTypeName = type.removeSurrounding(prefix = "LowCardinality(", suffix = ")")
-	val platformType = findPlatformType(platformTypeName)
 	return Type.Platform(platformType, type)
 }
 

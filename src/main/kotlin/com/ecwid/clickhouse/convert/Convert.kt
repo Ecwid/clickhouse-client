@@ -514,8 +514,10 @@ object Convert {
 				escapeAndQuoteString(kv.key) to value
 			}.toMap()
 
+		// Read direction: values coming from a response are already plain strings,
+		// no escaping/quoting must be applied
 		@JvmStatic
-		fun toMapValue(map: kotlin.collections.Map<String, String?>) = fromValue(map)
+		fun toMapValue(map: kotlin.collections.Map<String, String?>) = map
 	}
 
 	private const val QUOTE: Char = '\''

@@ -541,7 +541,7 @@ data class TypedRow(
 		return Convert.UInt256.toValue(scalar)
 	}
 
-	fun getUInt256rray(columnName: String): List<BigInteger> {
+	fun getUInt256Array(columnName: String): List<BigInteger> {
 		val array = rawRow.getArrayValue(columnName)
 		return Convert.UInt256.toArray(array)
 	}
@@ -748,12 +748,12 @@ data class TypedRow(
 
 	fun getDateTimeNullableArray(columnName: String): List<Date?> {
 		val array = rawRow.getArrayValue(columnName)
-		return Convert.DateTime.toArray(array, defaultTimeZone)
+		return Convert.DateTime.toNullableArray(array, defaultTimeZone)
 	}
 
 	fun getDateTimeNullableArray(columnName: String, timeZone: TimeZone): List<Date?> {
 		val array = rawRow.getArrayValue(columnName)
-		return Convert.DateTime.toArray(array, timeZone)
+		return Convert.DateTime.toNullableArray(array, timeZone)
 	}
 	// ----------------- DATE --------------------
 
@@ -922,12 +922,15 @@ data class TypedRow(
 
 	// ----------------- Map --------------------
 	fun getMapStringNullableString(columnName: String): Map<String, String?> {
-		val map = rawRow.getMapValue(columnName)
-		return Convert.Map.toMapValue(map)
+		return rawRow.getMapValue(columnName)
 	}
 
 	fun getMapStringString(columnName: String): Map<String, String> {
 		val map = rawRow.getMapValue(columnName)
-		return Convert.Map.toMapValue(map)
+		return map.mapValues { (key, value) ->
+			requireNotNull(value) {
+				"Unexpected null value for key '$key' in column '$columnName'"
+			}
+		}
 	}
 }
